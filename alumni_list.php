@@ -1,6 +1,3 @@
-<?php
-include 'admin/db_connect.php';
-?>
 <style>
     #portfolio .img-fluid {
         width: calc(100%);
@@ -11,7 +8,6 @@ include 'admin/db_connect.php';
     }
 
     .alumni-list {
-        cursor: pointer;
         border: unset;
         flex-direction: inherit;
     }
@@ -26,12 +22,15 @@ include 'admin/db_connect.php';
 
     .alumni-list .card-body {
         width: calc(70%);
+
     }
 
     .alumni-img img {
+        cursor: pointer;
         border-radius: 100%;
-        max-height: calc(100%);
-        max-width: calc(100%);
+        max-height: calc(90%);
+        max-width: calc(90%);
+        object-fit: cover;
     }
 
     span.hightlight {
@@ -84,12 +83,10 @@ include 'admin/db_connect.php';
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end mb-4 page-title">
                 <h3 class="text-white">Alumnus/Alumnae List</h3>
-                <hr class="divider my-4"/>
-
-                <div class="col-md-12 mb-2 justify-content-center">
+                <div class="col-md-12 mb-5 justify-content-center"></div>
                 </div>
             </div>
 
@@ -101,16 +98,16 @@ include 'admin/db_connect.php';
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="filter-field"><i class="fa fa-search"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="filter" placeholder="Filter name,course, etc."
+                        <input type="text" class="form-control" id="filter" placeholder="Filter name,course,etc..."
                                aria-label="Filter" aria-describedby="filter-field">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-block btn-sm" id="search">Search</button>
+                    <button class="btn btn-primary btn-block btn-sm mt-1" id="search">Search</button>
                 </div>
             </div>
 
@@ -118,7 +115,6 @@ include 'admin/db_connect.php';
     </div>
 </div>
 <div class="container-fluid mt-3 pt-2">
-
     <div class="row-items">
         <div class="col-lg-12">
             <div class="row">
@@ -129,13 +125,12 @@ include 'admin/db_connect.php';
                     ?>
                     <div class="col-md-4 item">
                         <div class="card alumni-list" data-id="<?php echo $row['id'] ?>">
-                            <div class="alumni-img" card-img-top>
-
+                            <div class="alumni-img card-img-top">
                                 <img src="<?php echo $fpath.'/'.$row['avatar'] ?>" alt="">
                             </div>
                             <div class="card-body">
                                 <div class="row align-items-center h-100">
-                                    <div class="">
+                                    <div class="ml-2">
                                         <div>
                                             <p class="filter-txt"><b><?php echo $row['name'] ?></b></p>
                                             <hr class="divider w-100" style="max-width: calc(100%)">
@@ -148,8 +143,6 @@ include 'admin/db_connect.php';
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                         <br>
@@ -159,7 +152,6 @@ include 'admin/db_connect.php';
         </div>
     </div>
 </div>
-
 
 <script>
     // $('.card.alumni-list').click(function(){

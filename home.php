@@ -119,7 +119,6 @@
                 $(this).closest('.card').toggle(true)
             } else {
                 $(this).closest('.card').toggle(false)
-
             }
         })
     })

@@ -33,6 +33,7 @@
         border: unset;
         font-size: 27px;
         top: 0;
+        right: 0;
     }
 
     #viewer_modal .modal-dialog {
@@ -74,7 +75,8 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="./"><?php echo $_SESSION['system']['name'] ?></a>
+        <a class="navbar-brand js-scroll-trigger"
+           href="./">WMSU <?php echo preg_replace('~\S\K\S*\s*~u', '', $_SESSION['system']['name']) ?></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -155,7 +157,7 @@ include $page.'.php';
             <div class="modal-header">
                 <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="fa fa-arrow-righ t"></span>
+                    <span class="fa fa-arrow-right"></span>
                 </button>
             </div>
             <div class="modal-body">

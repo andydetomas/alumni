@@ -1,6 +1,3 @@
-<?php
-include 'admin/db_connect.php';
-?>
 <style>
     #portfolio .img-fluid {
         width: calc(100%);
@@ -8,10 +5,6 @@ include 'admin/db_connect.php';
         z-index: -1;
         position: relative;
         padding: 1em;
-    }
-
-    .event-list {
-        cursor: pointer;
     }
 
     span.hightlight {
@@ -33,7 +26,6 @@ include 'admin/db_connect.php';
     }
 
     .event-list {
-        cursor: pointer;
         border: unset;
         flex-direction: inherit;
     }
@@ -47,6 +39,7 @@ include 'admin/db_connect.php';
     }
 
     .event-list .banner img {
+        object-fit: cover;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
         min-height: 50vh;
@@ -62,15 +55,11 @@ include 'admin/db_connect.php';
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end mb-4 page-title">
-                <h3 class="text-white">Welcome to <?php echo $_SESSION['system']['name']; ?></h3>
-                <hr class="divider my-4"/>
-
-                <div class="col-md-12 mb-2 justify-content-center">
-                </div>
+                <h3 class="text-white">Welcome to WMSU <?php echo $_SESSION['system']['name']; ?></h3>
+                <div class="col-md-12 mb-5 justify-content-center"></div>
             </div>
-
         </div>
     </div>
 </header>
@@ -78,7 +67,7 @@ include 'admin/db_connect.php';
     <h4 class="text-center text-white">Upcoming Events</h4>
     <hr class="divider">
     <?php
-    $event = $conn->query("SELECT * FROM events where date_format(schedule,'%Y-%m%-d') >= '".date('Y-m-d')."' order by unix_timestamp(schedule) asc");
+    $event = $conn->query("SELECT * FROM events ORDER BY schedule asc");
     while ($row = $event->fetch_assoc()):
         $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
         unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -95,25 +84,21 @@ include 'admin/db_connect.php';
                 <div class="row  align-items-center justify-content-center text-center h-100">
                     <div class="">
                         <h3><b class="filter-txt"><?php echo ucwords($row['title']) ?></b></h3>
-                        <div><small><p><b><i
-                                            class="fa fa-calendar"></i> <?php echo date("F d, Y h:i A", strtotime($row['schedule'])) ?>
-                                    </b></p></small></div>
+                        <div>
+                            <small>
+                                <i class="fa fa-calendar" aria-hidden="true"></i> <?php echo date("F d, Y h:i A", strtotime($row['schedule'])) ?>
+                            </small>
+                        </div>
                         <hr>
-                        <larger class="truncate filter-txt"><?php echo strip_tags($desc) ?></larger>
+                        <p class="truncate"><?php echo strip_tags($desc) ?></p>
                         <br>
-                        <hr class="divider" style="max-width: calc(80%)">
-                        <button class="btn btn-primary float-right read_more" data-id="<?php echo $row['id'] ?>">Read
-                            More
-                        </button>
+                        <button class="btn btn-primary float-right read_more btn-sm" data-id="<?php echo $row['id'] ?>">Read More</button>
                     </div>
                 </div>
-
-
             </div>
         </div>
         <br>
     <?php endwhile; ?>
-
 </div>
 
 

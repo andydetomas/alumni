@@ -76,7 +76,6 @@
                 <h3 class="text-white">Featured Post</h3>
                 <div class="col-md-12 mb-5 justify-content-center"></div>
             </div>
-
         </div>
     </div>
 </header>

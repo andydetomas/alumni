@@ -1,6 +1,3 @@
-<?php
-include 'admin/db_connect.php';
-?>
 <style>
     #portfolio .img-fluid {
         width: calc(100%);
@@ -21,6 +18,7 @@ include 'admin/db_connect.php';
     }
 
     .gallery-img img {
+        object-fit: cover;
         border-radius: 5px;
         min-height: 50vh;
         max-width: calc(100%);
@@ -73,13 +71,10 @@ include 'admin/db_connect.php';
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end mb-4 page-title">
                 <h3 class="text-white">Featured Post</h3>
-                <hr class="divider my-4"/>
-
-                <div class="col-md-12 mb-2 justify-content-center">
-                </div>
+                <div class="col-md-12 mb-5 justify-content-center"></div>
             </div>
 
         </div>
@@ -91,36 +86,21 @@ include 'admin/db_connect.php';
         <div class="col-lg-12">
             <div class="row">
                 <?php
-                $rtl = 'rtl';
+                $rtl = '';
                 $ci = 0;
-                $img = [];
-                $fpath = 'admin/assets/uploads/gallery';
-                $files = is_dir($fpath) ? scandir($fpath) : [];
-                foreach ($files as $val) {
-                    if (! in_array($val, ['.', '..'])) {
-                        $n = explode('_', $val);
-                        $img[$n[0]] = $val;
-                    }
-                }
                 $gallery = $conn->query("SELECT * from gallery order by id desc");
                 while ($row = $gallery->fetch_assoc()):
-
-                    $ci++;
-                    if ($ci < 3) {
-                        $rtl = '';
-                    } else {
+                    if ($ci%2 == 0) {
                         $rtl = 'rtl';
+                    } else {
+                        $rtl = '';
                     }
-                    if ($ci == 4) {
-                        $ci = 0;
-                    }
+                    $ci++;
                     ?>
                     <div class="col-md-6">
                         <div class="card gallery-list <?php echo $rtl ?>" data-id="<?php echo $row['id'] ?>">
-                            <div class="gallery-img" card-img-top>
-
-                                <img src="<?php echo isset($img[$row['id']]) && is_file($fpath.'/'.$img[$row['id']]) ? $fpath.'/'.$img[$row['id']] : '' ?>"
-                                     alt="">
+                            <div class="gallery-img card-img-top">
+                                <img src="admin/assets/uploads/gallery/<?php echo($row['path'])?>" alt="">
                             </div>
                             <div class="card-body">
                                 <div class="row align-items-center justify-content-center text-center h-100">
@@ -132,8 +112,6 @@ include 'admin/db_connect.php';
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                         <br>

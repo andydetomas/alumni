@@ -1,4 +1,3 @@
-<?php include 'admin/db_connect.php' ?>
 <?php
 if (isset($_GET['id'])) {
     $qry = $conn->query("SELECT * FROM events where id= ".$_GET['id']);
@@ -83,9 +82,7 @@ if (isset($_GET['id'])) {
             <div class="col-lg-4 align-self-end mb-4 pt-2 page-title">
                 <h4 class="text-center text-white"><b><?php echo ucwords($title) ?></b></h4>
                 <hr class="divider my-4"/>
-
             </div>
-
         </div>
     </div>
 </header>
@@ -100,16 +97,13 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="col-md-12" id="content">
                         <p class="">
-
-                        <p><b><i class="fa fa-calendar"></i> <?php echo date("F d, Y h:i A", strtotime($schedule)) ?>
-                            </b></p>
-                        <?php echo html_entity_decode($content); ?>
+                            <p><b><i class="fa fa-calendar"></i> <?php echo date("F d, Y h:i A", strtotime($schedule)) ?></b></p>
+                            <?php echo html_entity_decode($content); ?>
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <hr class="divider" style="max-width: calc(100%);"/>
                         <div class="text-center">
                             <?php if (isset($_SESSION['login_id'])): ?>
                                 <?php if (in_array($_SESSION['login_id'], $cids)): ?>

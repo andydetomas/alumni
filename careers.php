@@ -1,6 +1,3 @@
-<?php
-include 'admin/db_connect.php';
-?>
 <style>
     #portfolio .img-fluid {
         width: calc(100%);

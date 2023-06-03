@@ -66,6 +66,19 @@
         min-width: 4rem !important;
         padding: 5px
     }
+
+    .select2-container .select2-selection--single {
+        height: 37px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        margin-top: 2px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 2;
+    }
+
 </style>
 
 <body id="page-top">

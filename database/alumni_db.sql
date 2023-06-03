@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2023 at 06:39 PM
+-- Generation Time: Jun 03, 2023 at 04:31 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -48,7 +48,7 @@ CREATE TABLE `alumnus_bio` (
 --
 
 INSERT INTO `alumnus_bio` (`id`, `user_id`, `firstname`, `middlename`, `lastname`, `gender`, `batch`, `course_id`, `email`, `connected_to`, `avatar`, `status`, `date_created`) VALUES
-(2, 3, 'John', '', 'Snow', 'Male', '2009', 1, 'snow@gmail.com', 'My Company', '1602730260_avatar.jpg', 'ACTIVE', '2020-10-15');
+(2, 3, 'John', '', 'Snow', 'Male', '2009', 1, 'snow@gmail.com', 'My Company', 'alumni.jpg', 'ACTIVE', '2020-10-15');
 
 -- --------------------------------------------------------
 
@@ -190,6 +190,7 @@ INSERT INTO `forum_topics` (`id`, `user_id`, `title`, `description`, `date_creat
 CREATE TABLE `gallery` (
   `id` int(30) NOT NULL,
   `about` text NOT NULL,
+  `path` text NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -197,12 +198,12 @@ CREATE TABLE `gallery` (
 -- Dumping data for table `gallery`
 --
 
-INSERT INTO `gallery` (`id`, `about`, `created`) VALUES
-(1, 'Samplee', '2020-10-15 13:08:27'),
-(2, 'asdasd', '2020-10-15 13:15:37'),
-(3, 'asdasdrtgfdg', '2020-10-15 13:15:45'),
-(4, 'dfgdfgdfg', '2020-10-15 13:15:53'),
-(5, 'dfgdfgdfg', '2020-10-15 13:16:07');
+INSERT INTO `gallery` (`id`, `about`, `path`, `created`) VALUES
+(1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed massa eget ipsum interdum dignissim id eu leo. Fusce eget congue sapien. Aliquam sit amet elit enim. Sed finibus orci risus, at porta nunc pretium vel. Pellentesque tincidunt placerat ipsum id venenatis. Cras eleifend, metus ut faucibus pretium, urna odio lacinia justo, vitae vehicula elit purus feugiat lectus. Nulla hendrerit suscipit elementum', 'gallery-1.jpg', '2020-10-15 13:08:27'),
+(2, 'Phasellus non venenatis metus. Ut semper, nunc id maximus convallis, arcu leo tempus lacus, id tincidunt purus velit nec tellus. Nulla sit amet nibh dictum, blandit augue eleifend, sagittis lorem', 'gallery-2.jpeg', '2020-10-15 13:15:37'),
+(3, 'Fusce dictum consectetur semper. Etiam dignissim in augue ut tempor. Proin rhoncus vestibulum mollis. Integer pellentesque ullamcorper turpis. Quisque turpis lacus, iaculis id sodales tincidunt', 'gallery-3.jpg', '2020-10-15 13:15:45'),
+(4, 'Mauris augue felis, mattis sit amet sodales nec, pellentesque eu elit. Aliquam ultrices sem eget purus laoreet suscipit. Integer nec risus iaculis, sollicitudin velit ac, maximus ante', 'gallery-4.jpg', '2020-10-15 13:15:53'),
+(5, 'Curabitur ut malesuada orci. In sed rhoncus eros, sit amet malesuada tortor. Phasellus lobortis, nisl et euismod volutpat, orci odio malesuada neque, mollis iaculis erat ante non ante. Nulla tempus at leo ac condimentum. Morbi vitae malesuada ex', 'gallery-5.jpg', '2020-10-15 13:16:07');
 
 -- --------------------------------------------------------
 

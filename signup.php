@@ -1,6 +1,3 @@
-<?php
-include 'admin/db_connect.php';
-?>
 <style>
     .masthead {
         min-height: 23vh !important;
@@ -15,6 +12,12 @@ include 'admin/db_connect.php';
     img#cimg {
         max-height: 10vh;
         max-width: 6vw;
+    }
+
+    .form-group .required:after {
+        content: " *";
+        color: red;
+        font-weight: 100;
     }
 </style>
 <header class="masthead">
@@ -40,32 +43,32 @@ include 'admin/db_connect.php';
                         <form action="" id="create_account">
                             <div class="row form-group">
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Last Name</label>
+                                    <label for="" class="control-label required">Last Name</label>
                                     <input type="text" class="form-control" name="lastname" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">First Name</label>
+                                    <label for="" class="control-label required">First Name</label>
                                     <input type="text" class="form-control" name="firstname" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Middle Name</label>
+                                    <label for="" class="control-label required">Middle Name</label>
                                     <input type="text" class="form-control" name="middlename">
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Gender</label>
+                                    <label for="" class="control-label required">Gender</label>
                                     <select class="custom-select" name="gender" required>
                                         <option>Male</option>
                                         <option>Female</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Batch</label>
+                                    <label for="" class="control-label required">Batch</label>
                                     <input type="input" class="form-control datepickerY" name="batch" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Course Graduated</label>
+                                    <label for="" class="control-label required">Course Graduated</label>
                                     <select class="custom-select select2" name="course_id" required>
                                         <option></option>
                                         <?php
@@ -78,12 +81,12 @@ include 'admin/db_connect.php';
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col-md-5">
-                                    <label for="" class="control-label">Currently Connected To</label>
+                                <div class="col-md-4">
+                                    <label for="" class="control-label">Company/Business</label>
                                     <textarea name="connected_to" id="" cols="30" rows="3"
                                               class="form-control"></textarea>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <label for="" class="control-label">Image</label>
                                     <input type="file" class="form-control" name="img"
                                            onchange="displayImg(this,$(this))">
@@ -91,21 +94,17 @@ include 'admin/db_connect.php';
 
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row form-group">
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Email</label>
+                                    <label for="" class="control-label required">Email</label>
                                     <input type="email" class="form-control" name="email" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Password</label>
+                                    <label for="" class="control-label required">Password</label>
                                     <input type="password" class="form-control" name="password" required>
                                 </div>
                             </div>
-                            <div id="msg">
-
-                            </div>
-                            <hr class="divider">
-                            <div class="row">
+                            <div class="row form-group">
                                 <div class="col-md-12 text-center">
                                     <button class="btn btn-primary">Create Account</button>
                                 </div>
@@ -116,7 +115,6 @@ include 'admin/db_connect.php';
             </div>
         </div>
     </div>
-
 </div>
 
 

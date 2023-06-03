@@ -1,7 +1,3 @@
-<?php
-include 'admin/db_connect.php';
-
-?>
 <style>
     .masthead {
         min-height: 23vh !important;

@@ -157,6 +157,18 @@ if ($action == "participate") {
         echo $save;
     }
 }
+if ($action == "save_reserve") {
+    $save = $crud->save_reserve();
+    if ($save) {
+        echo $save;
+    }
+}
+if ($action == "delete_reserve") {
+    $save = $crud->delete_reserve();
+    if ($save) {
+        echo $save;
+    }
+}
 if ($action == "get_venue_report") {
     $get = $crud->get_venue_report();
     if ($get) {

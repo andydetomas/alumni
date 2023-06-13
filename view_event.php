@@ -107,7 +107,7 @@ if (isset($_GET['id'])) {
                         <div class="text-center">
                             <?php if (isset($_SESSION['login_id'])): ?>
                                 <?php if (in_array($_SESSION['login_id'], $cids)): ?>
-                                    <span class="badge badge-primary">Commited to Participate</span>
+                                    <span class="badge badge-success">You have committed to participate</span>
                                 <?php else: ?>
                                     <button class="btn btn-primary" id="participate" type="button">Participate</button>
                                 <?php endif; ?>
@@ -128,7 +128,7 @@ if (isset($_GET['id'])) {
     })
 
     function participate($id) {
-        start_load()
+        start_load();
         $.ajax({
             url: 'admin/ajax.php?action=participate',
             method: 'POST',

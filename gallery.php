@@ -8,7 +8,6 @@
     }
 
     .gallery-list {
-        cursor: pointer;
         border: unset;
         flex-direction: inherit;
     }
@@ -18,6 +17,7 @@
     }
 
     .gallery-img img {
+        cursor: pointer;
         object-fit: cover;
         border-radius: 5px;
         min-height: 50vh;
@@ -86,15 +86,21 @@
             <div class="row">
                 <?php
                 $rtl = '';
-                $ci = 0;
+                $left = 2;
+                $right = 2;
                 $gallery = $conn->query("SELECT * from gallery order by id desc");
                 while ($row = $gallery->fetch_assoc()):
-                    if ($ci%2 == 0) {
+                    if ($right != 0) {
                         $rtl = 'rtl';
+                        $right--;
                     } else {
                         $rtl = '';
+                        $left--;
                     }
-                    $ci++;
+                    if($right == 0 && $left == 0) {
+                        $left = 2;
+                        $right = 2;
+                    }
                     ?>
                     <div class="col-md-6">
                         <div class="card gallery-list <?php echo $rtl ?>" data-id="<?php echo $row['id'] ?>">
@@ -103,13 +109,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="row align-items-center justify-content-center text-center h-100">
-                                    <div class="">
-                                        <div>
-                                            <span class="truncate"
-                                                  style="font-size: inherit;"><small><?php echo ucwords($row['about']) ?></small></span>
-                                            <br>
-                                        </div>
-                                    </div>
+                                    <span class="truncate" style="font-size: inherit;"><small><?php echo ucwords($row['about']) ?></small></span>
+                                    <br>
                                 </div>
                             </div>
                         </div>

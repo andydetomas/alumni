@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<?php session_start(); ?>
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title><?php echo isset($_SESSION['system']['name']) ? $_SESSION['system']['name'] : '' ?></title>
-
-
-    <?php
+<?php
+include('./db_connect.php');
+if(!$conn) {
+    //header('location:error-page.php');
+} else {
+    session_start();
     if (! isset($_SESSION['login_id'])) {
         header('location:login.php');
     }
-    include('./header.php');
-    // include('./auth.php');
-    ?>
+    header("Cache-Control: no cache");
+    date_default_timezone_set('Asia/Manila');
+}
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+<?php include('header.php') ?>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title><?php echo isset($_SESSION['system']['name']) ? $_SESSION['system']['name'] : '' ?></title>
 </head>
 <style>
     body {
@@ -77,8 +79,6 @@
 <main id="view-panel">
     <?php $page = isset($_GET['page']) ? $_GET['page'] : 'home'; ?>
     <?php include $page.'.php' ?>
-
-
 </main>
 
 <div id="preloader"></div>

@@ -18,7 +18,6 @@ if (isset($_GET['id'])) {
     <p>Location: <i class="fa fa-map-marker"></i> <b>
             <large><?php echo $company ?></large>
         </b></p>
-    <hr class="divider">
     <?php echo html_entity_decode($description) ?>
 </div>
 <div class="modal-footer display">

@@ -1,15 +1,18 @@
-<?php include 'admin/db_connect.php' ?>
 <?php
 if (isset($_GET['id'])) {
-    $qry = $conn->query("SELECT * FROM market where id= ".$_GET['id']);
+    $qry = $conn->query("SELECT * FROM product where id= ".$_GET['id']);
     foreach ($qry->fetch_array() as $k => $val) {
         $$k = $val;
     }
-    $commits = $conn->query("SELECT * FROM market_commits where market_id = $id");
-    $cids = [];
-    while ($row = $commits->fetch_assoc()) {
-        $cids[] = $row['user_id'];
-    }
+
+    $commits = $conn->query("SELECT * FROM product_commits where product_id=$id and status='RESERVED'");
+    $row_commits = $commits->fetch_all(MYSQLI_ASSOC);
+    $available_quantity = $quantity-array_sum(array_column($row_commits, 'quantity'));
+    $my_commits = array_filter($row_commits, function ($var) {
+        return ($var['user_id'] == $_SESSION['login_id']);
+    });
+    $my_reservations = array_sum(array_column($my_commits, 'quantity'));
+    //echo("<script>console.log('PHP OUTPUT: " . json_encode($row_commits) . "');</script>");
 }
 ?>
 <style type="text/css">
@@ -68,9 +71,9 @@ if (isset($_GET['id'])) {
         cursor: pointer;
     }
 
-    <?php if(!empty($banner)): ?>
+    <?php if(!empty($photo)): ?>
     header.masthead {
-        background: url(admin/assets/uploads/<?php echo $banner ?>);
+        background: url(admin/assets/uploads/<?php echo $photo ?>);
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -79,13 +82,14 @@ if (isset($_GET['id'])) {
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-4 align-self-end mb-4 pt-2 page-title">
-                <h4 class="text-center text-white"><b><?php echo ucwords($title) ?></b></h4>
+                <h4 class="text-center text-white"><b><?php echo ucwords($name) ?></b></h4>
                 <hr class="divider my-4"/>
-
+                <p class="text-center text-white mt-n2"><small><i class="fa fa-calendar"></i> Reserve until <?php echo date("F d, Y", strtotime($valid_until)) ?></small></p>
+                <p class="text-center text-white mt-n3"><small><i class="fa fa-cart-plus"></i> Quantity Available: <?php echo $available_quantity > 0 ? $available_quantity : 'SOLD OUT' ?></small></p>
+                <p class="text-center text-white mt-n3"><small><i class="fa fa-tag"></i> PHP <?php echo $price ?></small></p>
             </div>
-
         </div>
     </div>
 </header>
@@ -95,28 +99,23 @@ if (isset($_GET['id'])) {
         <div class="card mt-4 mb-4">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12">
-
-                    </div>
                     <div class="col-md-12" id="content">
-                        <p class="">
-
-                        <p><b><i class="fa fa-calendar"></i> <?php echo date("F d, Y h:i A", strtotime($schedule)) ?>
-                            </b></p>
-                        <?php echo html_entity_decode($content); ?>
-                        </p>
+                        <?php if (isset($_SESSION['login_id']) && $_SESSION['login_type'] != 'ADMIN1'): ?>
+                        <h6 class="text-info">My Reservations: <?php echo empty($my_reservations) ? "No order placed yet" : $my_reservations. " pc/s" ?></h6>
+                        <hr>
+                        <?php endif; ?>
+                        <p class="mt-5"><?php echo html_entity_decode($description); ?></p>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-5">
                     <div class="col-md-12">
-                        <hr class="divider" style="max-width: calc(100%);"/>
                         <div class="text-center">
-                            <?php if (isset($_SESSION['login_id'])): ?>
-                                <?php if (in_array($_SESSION['login_id'], $cids)): ?>
-                                    <span class="badge badge-primary">Reserved a piece</span>
+                            <?php if (isset($_SESSION['login_id']) && $_SESSION['login_type'] != 'ADMIN1'): ?>
+                                <?php if (!empty($my_reservations)): ?>
+                                    <button class="btn btn-danger" id="cancel_reserve" data-id="<?php echo $_GET['id'] ?>" type="button">Cancel My Order</button>
+                                    <button class="btn btn-primary" id="reserve" data-id="<?php echo $_GET['id'] ?>" type="button">Reserve Another?</button>
                                 <?php else: ?>
-                                    <button class="btn btn-primary" id="participate" type="button">Reserve an Order?
-                                    </button>
+                                <button class="btn btn-primary" id="reserve" data-id="<?php echo $_GET['id'] ?>" type="button">Reserve Now</button>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </div>
@@ -129,24 +128,25 @@ if (isset($_GET['id'])) {
 <script>
     $('#imagesCarousel img,#banner img').click(function () {
         viewer_modal($(this).attr('src'))
+    });
+    $('#cancel_reserve').click(function () {
+        _conf("Are you sure you want to cancel all your orders?", "cancel_reserve", [<?php echo $id ?>], 'mid-large')
+    });
+    $('#reserve').click(function () {
+        uni_modal("Merch Reservation", "manage_market.php?id=" + $(this).attr('data-id'), 'mid-large')
     })
-    $('#participate').click(function () {
-        _conf("Are you sure to Reserve an Item slot?", "participate", [<?php echo $id ?>], 'mid-large')
-    })
-
-    function participate($id) {
-        start_load()
+    function cancel_reserve($id) {
+        start_load();
         $.ajax({
-            url: 'admin/ajax.php?action=participate',
+            url: 'admin/ajax.php?action=delete_reserve',
             method: 'POST',
-            data: {event_id: $id},
+            data: {id: $id},
             success: function (resp) {
                 if (resp == 1) {
-                    alert_toast("Data successfully deleted", 'success')
+                    alert_toast("Orders are successfully cancelled", 'success');
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
-
                 }
             }
         })

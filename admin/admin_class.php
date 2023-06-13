@@ -22,27 +22,27 @@ Class Action
 
     function login()
     {
-
         extract($_POST);
-        $qry = $this->db->query("SELECT * FROM users where username = '".$username."' and password = '".md5($password)."' ");
+        $qry = $this->db->query("SELECT * FROM users where username = '".$username."' and password = '".md5($password)."'");
         if ($qry->num_rows > 0) {
             foreach ($qry->fetch_array() as $key => $value) {
-                if ($key != 'passwors' && ! is_numeric($key)) {
+                if ($key != 'password' && ! is_numeric($key)) {
                     $_SESSION['login_'.$key] = $value;
                 }
             }
-            if ($_SESSION['login_type'] != 1) {
+            if ($_SESSION['login_type'] == 'OFFICER') {
                 foreach ($_SESSION as $key => $value) {
                     unset($_SESSION[$key]);
                 }
-
-                return 2;
-                exit;
+                return 'OFFICER';
             }
-
-            return 1;
+            else if ($_SESSION['login_type'] == 'ADMIN') {
+                return 'ADMIN';
+            } else {
+                return 'ALUMNI'; //alumni found
+            }
         } else {
-            return 3;
+            return null; //no user found
         }
     }
 
@@ -56,7 +56,7 @@ Class Action
         $qry = $this->db->query("SELECT * FROM users where username = '".$username."' and password = '".md5($password)."' ");
         if ($qry->num_rows > 0) {
             foreach ($qry->fetch_array() as $key => $value) {
-                if ($key != 'passwors' && ! is_numeric($key)) {
+                if ($key != 'password' && ! is_numeric($key)) {
                     $_SESSION['login_'.$key] = $value;
                 }
             }
@@ -472,6 +472,29 @@ Class Action
         $data .= ", user_id = '{$_SESSION['login_id']}' ";
         $commit = $this->db->query("INSERT INTO event_commits set $data ");
         if ($commit) {
+            return 1;
+        }
+    }
+
+    function save_reserve()
+    {
+        extract($_POST);
+        $data = " product_id = '$id' ";
+        $data .= ", user_id = '{$_SESSION['login_id']}' ";
+        $data .= ", quantity = '$quantity' ";
+        $data .= ", status = 'RESERVED' ";
+        $commit = $this->db->query("INSERT INTO product_commits set $data");
+        if ($commit) {
+            return 1;
+        }
+    }
+
+    function delete_reserve()
+    {
+        extract($_POST);
+        $data = " status = 'CANCELLED' ";
+        $delete = $this->db->query("UPDATE product_commits set ".$data." where product_id=".$id." and user_id=".$_SESSION['login_id']);
+        if ($delete) {
             return 1;
         }
     }

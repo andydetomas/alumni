@@ -88,7 +88,7 @@
         </div>
     </div>
     <?php
-    $event = $conn->query("SELECT f.*,u.name from forum_topics f inner join users u on u.id = f.user_id order by f.id desc");
+    $event = $conn->query("SELECT f.*,u.first_name from forum_topics f inner join users u on u.id = f.user_id order by f.id desc");
     while ($row = $event->fetch_assoc()):
         $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
         unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -121,7 +121,7 @@
                         <br>
                         <hr class="divider" style="max-width: calc(80%)">
                         <span class="badge badge-info float-left px-3 pt-1 pb-1">
-                        <b><i>Topic Created by: <span class="filter-txt"><?php echo $row['name'] ?></span></i></b>
+                        <b><i>Topic Created by: <span class="filter-txt"><?php echo $row['first_name'] ?></span></i></b>
                     </span>
                         <span class="badge badge-secondary float-left px-3 pt-1 pb-1 ml-2">
                         <b><i class="fa fa-comments"></i> <i><?php echo $count_comments ?> Comments</i></b>

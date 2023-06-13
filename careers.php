@@ -58,9 +58,7 @@
                 <h3 class="text-white">Job List</h3>
                 <hr class="divider my-4"/>
                 <div class="row col-md-12 mb-2 justify-content-center">
-                    <button class="btn btn-primary btn-block col-sm-4" type="button" id="new_career"><i
-                                class="fa fa-plus"></i> Post a Job Opportunity
-                    </button>
+                    <button class="btn btn-primary btn-block col-sm-4" type="button" id="new_career"><i class="fa fa-plus"></i> Post a Job Opportunity</button>
                 </div>
             </div>
 
@@ -88,7 +86,7 @@
         </div>
     </div>
     <?php
-    $event = $conn->query("SELECT c.*,u.name from careers c inner join users u on u.id = c.user_id order by id desc");
+    $event = $conn->query("SELECT c.*,u.first_name,u.last_name from careers c inner join users u on u.id = c.user_id order by id desc");
     while ($row = $event->fetch_assoc()):
         $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
         unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -109,11 +107,10 @@
                         <hr>
                         <larger class="truncate filter-txt"><?php echo strip_tags($desc) ?></larger>
                         <br>
-                        <hr class="divider" style="max-width: calc(80%)">
                         <span class="badge badge-info float-left px-3 pt-1 pb-1">
-                        <b><i>Posted by: <?php echo $row['name'] ?></i></b>
+                        <i>Posted by: <?php echo $row['first_name']." ".$row['last_name'] ?></i>
                     </span>
-                        <button class="btn btn-primary float-right read_more" data-id="<?php echo $row['id'] ?>">Read
+                        <button class="btn btn-primary float-right read_more btn-sm mt-5" data-id="<?php echo $row['id'] ?>">Read
                             More
                         </button>
                     </div>

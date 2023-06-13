@@ -1,23 +1,21 @@
+<?php
+    session_start();
+    include('./db_connect.php');
+    ob_start();
+    if (! isset($_SESSION['system'])) {
+        $system = $conn->query("SELECT * FROM system_settings limit 1")->fetch_array();
+        foreach ($system as $k => $v) {
+            $_SESSION['system'][$k] = $v;
+        }
+    }
+    ob_end_flush();
+?>
 <!DOCTYPE html>
 <html lang="en">
-<?php
-session_start();
-include('./db_connect.php');
-ob_start();
-if (! isset($_SESSION['system'])) {
-    $system = $conn->query("SELECT * FROM system_settings limit 1")->fetch_array();
-    foreach ($system as $k => $v) {
-        $_SESSION['system'][$k] = $v;
-    }
-}
-ob_end_flush();
-?>
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
     <title><?php echo $_SESSION['system']['name'] ?></title>
-
 
     <?php include('./header.php'); ?>
     <?php
@@ -128,7 +126,7 @@ ob_end_flush();
 </body>
 <script>
     $('#login-form').submit(function (e) {
-        e.preventDefault()
+        e.preventDefault();
         $('#login-form button[type="button"]').attr('disabled', true).html('Logging in...');
         if ($(this).find('.alert-danger').length > 0)
             $(this).find('.alert-danger').remove();
@@ -137,12 +135,11 @@ ob_end_flush();
             method: 'POST',
             data: $(this).serialize(),
             error: err => {
-                console.log(err)
+                console.log(err);
                 $('#login-form button[type="button"]').removeAttr('disabled').html('Login');
-
             },
             success: function (resp) {
-                if (resp == 1) {
+                if (resp === 'ADMIN' || resp === 'OFFICER') {
                     location.href = 'index.php?page=home';
                 } else {
                     $('#login-form').prepend('<div class="alert alert-danger">Username or password is incorrect.</div>')

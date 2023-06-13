@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     <p>Job Title: <b>
             <large><?php echo ucwords($job_title) ?></large>
         </b></p>
-    <p>Location: <i class="fa fa-map-marker"></i> <b>
+    <p>Location:<b>
             <large><?php echo $company ?></large>
         </b></p>
     <?php echo html_entity_decode($description) ?>

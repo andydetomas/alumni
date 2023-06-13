@@ -53,7 +53,7 @@
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end mb-4 page-title">
                 <h3 class="text-white">Job List</h3>
                 <hr class="divider my-4"/>
@@ -70,16 +70,16 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="filter-field"><i class="fa fa-search"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Filter" id="filter" aria-label="Filter"
+                        <input type="text" class="form-control" placeholder="Filter jobs..." id="filter" aria-label="Filter"
                                aria-describedby="filter-field">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-block btn-sm" id="search">Search</button>
+                    <button class="btn btn-primary btn-block btn-sm mt-1" id="search">Search</button>
                 </div>
             </div>
 
@@ -110,20 +110,15 @@
                         <span class="badge badge-info float-left px-3 pt-1 pb-1">
                         <i>Posted by: <?php echo $row['first_name']." ".$row['last_name'] ?></i>
                     </span>
-                        <button class="btn btn-primary float-right read_more btn-sm mt-5" data-id="<?php echo $row['id'] ?>">Read
+                        <button class="btn btn-primary float-right read_more btn-sm" data-id="<?php echo $row['id'] ?>">Read
                             More
                         </button>
                     </div>
                 </div>
-
-
             </div>
         </div>
         <br>
     <?php endwhile; ?>
-
-</div>
-
 </div>
 
 

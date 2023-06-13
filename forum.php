@@ -53,14 +53,13 @@
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end mb-4 page-title">
-                <h3 class="text-white">Forum List</h3>
+                <h3 class="text-white">WMSU Forum</h3>
                 <hr class="divider my-4"/>
                 <div class="row col-md-12 mb-2 justify-content-center">
-                    <button class="btn btn-primary btn-block col-sm-4" type="button" id="new_forum"><i
-                                class="fa fa-plus"></i> Create New Topic
-                    </button>
+                    <button class="btn btn-primary btn-block col-sm-4" type="button" id="new_forum">
+                        <i class="fa fa-plus"></i> Create New Topic</button>
                 </div>
             </div>
 
@@ -72,23 +71,21 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="filter-field"><i class="fa fa-search"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="filter" placeholder="Filter" aria-label="Filter"
-                               aria-describedby="filter-field">
+                        <input type="text" class="form-control" id="filter" placeholder="Search forum topics..." aria-label="Filter" aria-describedby="filter-field">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-block btn-sm" id="search">Search</button>
+                    <button class="btn btn-primary btn-block btn-sm mt-1" id="search">Search</button>
                 </div>
             </div>
-
         </div>
     </div>
     <?php
-    $event = $conn->query("SELECT f.*,u.first_name from forum_topics f inner join users u on u.id = f.user_id order by f.id desc");
+    $event = $conn->query("SELECT f.*,u.first_name,u.last_name from forum_topics f inner join users u on u.id = f.user_id order by f.id desc");
     while ($row = $event->fetch_assoc()):
         $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
         unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -119,14 +116,13 @@
                         <hr>
                         <larger class="truncate filter-txt"><?php echo strip_tags($desc) ?></larger>
                         <br>
-                        <hr class="divider" style="max-width: calc(80%)">
                         <span class="badge badge-info float-left px-3 pt-1 pb-1">
-                        <b><i>Topic Created by: <span class="filter-txt"><?php echo $row['first_name'] ?></span></i></b>
+                        <i>Created by: <span class="filter-txt"><?php echo $row['first_name']." ".$row['last_name'] ?></span></i>
                     </span>
                         <span class="badge badge-secondary float-left px-3 pt-1 pb-1 ml-2">
-                        <b><i class="fa fa-comments"></i> <i><?php echo $count_comments ?> Comments</i></b>
+                        <i class="fa fa-comments"></i> <i><?php echo $count_comments ?> Comments</i>
                     </span>
-                        <button class="btn btn-primary float-right view_topic" data-id="<?php echo $row['id'] ?>">View
+                        <button class="btn btn-primary float-right view_topic btn-sm" data-id="<?php echo $row['id'] ?>">View
                             Topic
                         </button>
                     </div>
@@ -137,16 +133,9 @@
         </div>
         <br>
     <?php endwhile; ?>
-
 </div>
-
-</div>
-
 
 <script>
-    // $('.card.gallery-list').click(function(){
-    //     location.href = "index.php?page=view_gallery&id="+$(this).attr('data-id')
-    // })
     $('#new_forum').click(function () {
         uni_modal("New Topic", "manage_forum.php", 'mid-large')
     })
@@ -160,7 +149,7 @@
         viewer_modal($(this).attr('src'))
     })
     $('.delete_forum').click(function () {
-        _conf("Are you sure to delete this Topic?", "delete_forum", [$(this).attr('data-id')], 'mid-large')
+        _conf("Are you sure to delete this thread?", "delete_forum", [$(this).attr('data-id')], 'mid-large')
     })
 
     function delete_forum($id) {
@@ -206,5 +195,4 @@
         })
         end_load()
     })
-
 </script>

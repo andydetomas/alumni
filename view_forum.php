@@ -1,6 +1,6 @@
 <?php
 include 'admin/db_connect.php';
-$topic = $conn->query("SELECT *,u.name from forum_topics f inner join users u on u.id = f.user_id  where f.id = ".$_GET['id']);
+$topic = $conn->query("SELECT *,u.first_name, u.last_name from forum_topics f inner join users u on u.id = f.user_id  where f.id = ".$_GET['id']);
 foreach ($topic->fetch_array() as $k => $v) {
     if (! is_numeric($k)) {
         $$k = $v;
@@ -66,11 +66,7 @@ foreach ($topic->fetch_array() as $k => $v) {
             <div class="col-lg-8 align-self-end mb-4 page-title">
                 <h3 class="text-white"><?php echo $title ?></h3>
                 <hr class="divider my-4"/>
-                <div class="row col-md-12 mb-2 justify-content-center">
-                   <span class="badge badge-primary px-3 pt-1 pb-1">
-                        <b><i>Topic Created by: <?php echo $name ?></i></b>
-                    </span>
-                </div>
+                <h6 class="text-white">Created by: <?php echo $first_name." ".$last_name ?></h6>
             </div>
 
         </div>
@@ -80,18 +76,16 @@ foreach ($topic->fetch_array() as $k => $v) {
     <div class="card mb-4">
         <div class="card-body">
             <?php echo html_entity_decode($description) ?>
-            <hr class="divider">
         </div>
     </div>
     <?php
-    // echo "SELECT f.*,u.name,u.email FROM forum_comments f inner join users u on u.id = f.user_id where f.topic_id = $id order by f.id asc";
-    $comments = $conn->query("SELECT f.*,u.name,u.username FROM forum_comments f inner join users u on u.id = f.user_id where f.topic_id = $id order by f.id asc");
+    $comments = $conn->query("SELECT f.*,u.first_name,u.last_name,u.username FROM forum_comments f inner join users u on u.id = f.user_id where f.topic_id = $id order by f.id asc");
     ?>
     <div class="card mb-4">
         <div class="card-body">
             <div class="col-lg-12">
                 <div class="row">
-                    <h3><b> <i class="fa fa-comments"></i> <?php echo $comments->num_rows ?> Comments</b></h3>
+                    <h5><b> <i class="fa fa-comments"></i> <?php echo $comments->num_rows ?> Comments</b></h5>
                 </div>
                 <hr class="divider" style="max-width: 100%">
                 <?php
@@ -113,7 +107,7 @@ foreach ($topic->fetch_array() as $k => $v) {
                             </div>
                         <?php endif; ?>
                         <p class="mb-0">
-                            <large><b><?php echo $row['name'] ?></b></large>
+                            <large><b><?php echo $row['first_name'] ?></b></large>
                         </p>
                         <small class="mb-0"><i><?php echo $row['username'] ?></i></small>
                         <br>
@@ -122,7 +116,6 @@ foreach ($topic->fetch_array() as $k => $v) {
                     </div>
                 <?php endwhile; ?>
             </div>
-            <hr class="divider" style="max-width: 100%">
             <div class="col-lg-12">
                 <form action="" id="manage-comment">
                     <div class="form-group">
@@ -130,21 +123,16 @@ foreach ($topic->fetch_array() as $k => $v) {
                         <textarea class="form-control jqte" name="comment" cols="30" rows="5"
                                   placeholder="New Comment"></textarea>
                     </div>
-                    <button class="btn btn-primary">Save Comment</button>
+                    <button class="btn btn-primary float-right">Save Comment</button>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
 
 
 <script>
-    // $('.card.gallery-list').click(function(){
-    //     location.href = "index.php?page=view_gallery&id="+$(this).attr('data-id')
-    // })
     $('.jqte').jqte();
-
     $('#new_forum').click(function () {
         uni_modal("New Topic", "manage_forum.php", 'mid-large')
     })
@@ -154,7 +142,6 @@ foreach ($topic->fetch_array() as $k => $v) {
     $('.view_topic').click(function () {
         uni_modal("Career Opportunity", "view_Forums.php?id=" + $(this).attr('data-id'), 'mid-large')
     })
-
     $('#search').click(function () {
         var txt = $(this).val()
         start_load()
@@ -188,7 +175,6 @@ foreach ($topic->fetch_array() as $k => $v) {
     $('.delete_comment').click(function () {
         _conf("Are you sure to delete this comment?", "delete_comment", [$(this).attr('data-id')], 'mid-large')
     })
-
     function delete_comment($id) {
         start_load()
         $.ajax({
@@ -201,10 +187,8 @@ foreach ($topic->fetch_array() as $k => $v) {
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
-
                 }
             }
         })
     }
-
 </script>

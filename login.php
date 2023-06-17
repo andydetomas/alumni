@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <form action="" id="login-frm">
         <div class="form-group">
-            <label for="username" class="control-label">Username</label>
+            <label for="username" class="control-label">Username/Email</label>
             <input type="text" id="username" name="username" class="form-control">
         </div>
         <div class="form-group">

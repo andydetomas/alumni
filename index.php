@@ -84,6 +84,10 @@
         line-height: 2;
     }
 
+    #switch_page {
+        cursor: pointer;
+    }
+
 </style>
 
 <body id="page-top">
@@ -119,11 +123,12 @@
                                aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['login_first_name'] ?> <i
                                     class="fa fa-angle-down"></i></a>
                             <div class="dropdown-menu" aria-labelledby="account_settings" style="left: -2.5em;">
+                                <?php if ($_SESSION['login_type'] != 'ALUMNI'): ?>
                                 <a class="dropdown-item" id="switch_page"><i class="fa fa-table"></i> Admin Dashboard</a>
-                                <a class="dropdown-item" href="index.php?page=my_account" id="manage_my_account"><i
-                                        class="fa fa-cog"></i> Manage Account</a>
-                                <a class="dropdown-item" href="admin/ajax.php?action=logout2"><i
-                                        class="fa fa-power-off"></i> Logout</a>
+                                <?php endif; if (isset($_SESSION['bio']['id'])): ?>
+                                <a class="dropdown-item" href="index.php?page=my_account" id="manage_my_account"><i class="fa fa-cog"></i> Manage Account</a>
+                                <?php endif; ?>
+                                <a class="dropdown-item" href="admin/ajax.php?action=logout2"><i class="fa fa-power-off"></i> Logout</a>
                             </div>
                         </div>
                     </li>

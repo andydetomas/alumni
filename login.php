@@ -2,8 +2,8 @@
 <div class="container-fluid">
     <form action="" id="login-frm">
         <div class="form-group">
-            <label for="" class="control-label">Email</label>
-            <input type="email" name="username" required="" class="form-control">
+            <label for="username" class="control-label">Username</label>
+            <input type="text" id="username" name="username" class="form-control">
         </div>
         <div class="form-group">
             <label for="" class="control-label">Password</label>
@@ -22,7 +22,7 @@
 
 <script>
     $('#login-frm').submit(function (e) {
-        e.preventDefault()
+        e.preventDefault();
         $('#login-frm button[type="submit"]').attr('disabled', true).html('Logging in...');
         if ($(this).find('.alert-danger').length > 0)
             $(this).find('.alert-danger').remove();
@@ -31,9 +31,8 @@
             method: 'POST',
             data: $(this).serialize(),
             error: err => {
-                console.log(err)
+                console.log(err);
                 $('#login-frm button[type="submit"]').removeAttr('disabled').html('Login');
-
             },
             success: function (resp) {
                 if (resp == 1) {

@@ -24,6 +24,11 @@
         background-size: cover;
     }
 
+    header.masthead, header.masthead:before {
+        min-height: 60vh !important;
+        height: 60vh !important
+    }
+
     #viewer_modal .btn-close {
         position: absolute;
         z-index: 999999;
@@ -95,16 +100,16 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=home">Home</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=alumni_list">Alumni</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=gallery">Featured Post</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger nav-home nav-" href="index.php?page=home">Home</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger nav-alumni_list" href="index.php?page=alumni_list">Alumni</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger nav-gallery" href="index.php?page=gallery">Featured Post</a></li>
                 <?php if (isset($_SESSION['login_id'])): ?>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=market">Marketplace</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=tracer">Tracer Study</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=careers">Jobs</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=forum">Forums</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger nav-market" href="index.php?page=market">Marketplace</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger nav-tracer" href="index.php?page=tracer">Tracer Study</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger nav-careers" href="index.php?page=careers">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger nav-forum" href="index.php?page=forum">Forums</a></li>
                 <?php endif; ?>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=about">About</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger nav-about" href="index.php?page=about">About</a></li>
                 <?php if (! isset($_SESSION['login_id'])): ?>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" id="login">Login</a></li>
                 <?php else: ?>
@@ -114,8 +119,7 @@
                                aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['login_first_name'] ?> <i
                                     class="fa fa-angle-down"></i></a>
                             <div class="dropdown-menu" aria-labelledby="account_settings" style="left: -2.5em;">
-                                <a class="dropdown-item" href="index.php?page=my_account" id="manage_my_account"><i
-                                            class="fa fa-table"></i> Admin Dashboard</a>
+                                <a class="dropdown-item" id="switch_page"><i class="fa fa-table"></i> Admin Dashboard</a>
                                 <a class="dropdown-item" href="index.php?page=my_account" id="manage_my_account"><i
                                         class="fa fa-cog"></i> Manage Account</a>
                                 <a class="dropdown-item" href="admin/ajax.php?action=logout2"><i
@@ -223,8 +227,18 @@ include $page.'.php';
 <script type="text/javascript">
     $('#login').click(function () {
         uni_modal("Login", 'login.php')
+    });
+    $('#switch_page').click(function () {
+        location.replace('admin/index.php');
     })
 </script>
+<script>
+    $('.nav-item').click(function () {
+        $($(this).attr('href')).collapse()
+    })
+    $('.nav-<?php echo isset($_GET['page']) ? $_GET['page'] : '' ?>').addClass('active')
+</script>
+
 <?php $conn->close() ?>
 
 </html>

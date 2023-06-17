@@ -1,12 +1,7 @@
 <style>
-    .masthead {
-        min-height: 23vh !important;
-        height: 23vh !important;
-    }
-
-    .masthead:before {
-        min-height: 23vh !important;
-        height: 23vh !important;
+    header.masthead, header.masthead:before {
+        min-height: 50vh !important;
+        height: 50vh !important
     }
 
     img#cimg {
@@ -22,15 +17,12 @@
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end mb-4 page-title">
                 <h3 class="text-white">Create Account</h3>
                 <hr class="divider my-4"/>
-
-                <div class="col-md-12 mb-2 justify-content-center">
-                </div>
+                <div class="col-md-12 mb-5 justify-content-center"></div>
             </div>
-
         </div>
     </div>
 </header>
@@ -87,9 +79,9 @@
                                               class="form-control"></textarea>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Image</label>
+                                    <label for="" class="control-label required">Image</label>
                                     <input type="file" class="form-control" name="img"
-                                           onchange="displayImg(this,$(this))">
+                                           onchange="displayImg(this,$(this))" required>
                                     <img src="" alt="" id="cimg">
 
                                 </div>
@@ -103,6 +95,9 @@
                                     <label for="" class="control-label required">Password</label>
                                     <input type="password" class="form-control" name="password" required>
                                 </div>
+                            </div>
+                            <div id="msg">
+
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-12 text-center">
@@ -120,15 +115,14 @@
 
 <script>
     $('.datepickerY').datepicker({
-        format: " yyyy",
+        format: "yyyy",
         viewMode: "years",
         minViewMode: "years"
-    })
+    });
     $('.select2').select2({
         placeholder: "Please Select Here",
         width: "100%"
-    })
-
+    });
     function displayImg(input, _this) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -141,8 +135,8 @@
     }
 
     $('#create_account').submit(function (e) {
-        e.preventDefault()
-        start_load()
+        e.preventDefault();
+        start_load();
         $.ajax({
             url: 'admin/ajax.php?action=signup',
             data: new FormData($(this)[0]),
@@ -153,10 +147,16 @@
             type: 'POST',
             success: function (resp) {
                 if (resp == 1) {
-                    location.replace('index.php')
+                    alert_toast("Account is pending for verification.", 'success');
+                    setTimeout(function () {
+                        location.replace('index.php');
+                    }, 5000);
+                } else if (resp == 2) {
+                    $('#msg').html('<div class="alert alert-danger">Email already exist.</div>');
+                    end_load();
                 } else {
-                    $('#msg').html('<div class="alert alert-danger">email already exist.</div>')
-                    end_load()
+                    $('#msg').html('<div class="alert alert-danger">Error in creating your account.</div>');
+                    end_load();
                 }
             }
         })

@@ -4,27 +4,30 @@
         height: 23vh !important;
     }
 
-    .masthead:before {
-        min-height: 23vh !important;
-        height: 23vh !important;
+    header.masthead, header.masthead:before {
+        min-height: 50vh !important;
+        height: 50vh !important
     }
 
     img#cimg {
         max-height: 10vh;
         max-width: 6vw;
     }
+
+    .form-group .required:after {
+        content: " *";
+        color: red;
+        font-weight: 100;
+    }
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="row h-75 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end mb-4 page-title">
                 <h3 class="text-white">Manage Account</h3>
                 <hr class="divider my-4"/>
-
-                <div class="col-md-12 mb-2 justify-content-center">
-                </div>
+                <div class="col-md-12 mb-5 justify-content-center"></div>
             </div>
-
         </div>
     </div>
 </header>
@@ -37,24 +40,24 @@
                         <form action="" id="update_account">
                             <div class="row form-group">
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Last Name</label>
+                                    <label for="" class="control-label required">Last Name</label>
                                     <input type="text" class="form-control" name="lastname"
                                            value="<?php echo $_SESSION['bio']['lastname'] ?>" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">First Name</label>
+                                    <label for="" class="control-label required">First Name</label>
                                     <input type="text" class="form-control" name="firstname"
                                            value="<?php echo $_SESSION['bio']['firstname'] ?>" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Middle Name</label>
+                                    <label for="" class="control-label required">Middle Name</label>
                                     <input type="text" class="form-control" name="middlename"
                                            value="<?php echo $_SESSION['bio']['middlename'] ?>">
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Gender</label>
+                                    <label for="" class="control-label required">Gender</label>
                                     <select class="custom-select" name="gender" required>
                                         <option <?php echo $_SESSION['bio']['gender'] == 'Male' ? 'selected' : '' ?>>
                                             Male
@@ -65,12 +68,12 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Batch</label>
+                                    <label for="" class="control-label required">Batch</label>
                                     <input type="input" class="form-control datepickerY" name="batch"
                                            value="<?php echo $_SESSION['bio']['batch'] ?>" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label">Course Graduated</label>
+                                    <label for="" class="control-label required">Course Graduated</label>
                                     <select class="custom-select select2" name="course_id" required>
                                         <option></option>
                                         <?php
@@ -89,7 +92,7 @@
                                               class="form-control"><?php echo $_SESSION['bio']['connected_to'] ?></textarea>
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="" class="control-label">Image</label>
+                                    <label for="" class="control-label required">Image</label>
                                     <input type="file" class="form-control" name="img"
                                            onchange="displayImg(this,$(this))">
                                     <img src="admin/assets/uploads/<?php echo $_SESSION['bio']['avatar'] ?>" alt=""
@@ -112,8 +115,7 @@
                             <div id="msg">
 
                             </div>
-                            <hr class="divider">
-                            <div class="row">
+                            <div class="row mt-5">
                                 <div class="col-md-12 text-center">
                                     <button class="btn btn-primary">Update Account</button>
                                 </div>
@@ -162,13 +164,17 @@
             method: 'POST',
             type: 'POST',
             success: function (resp) {
+                console.log(resp);
                 if (resp == 1) {
                     alert_toast("Account successfully updated.", 'success');
                     setTimeout(function () {
-                        location.reload()
-                    }, 700)
+                        location.reload();
+                    }, 3000)
+                } else if (resp == 2) {
+                    $('#msg').html('<div class="alert alert-danger">Email already exist.</div>');
+                    end_load()
                 } else {
-                    $('#msg').html('<div class="alert alert-danger">email already exist.</div>')
+                    $('#msg').html('<div class="alert alert-danger">Error in updating your profile.</div>');
                     end_load()
                 }
             }

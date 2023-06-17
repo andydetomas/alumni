@@ -79,7 +79,7 @@ foreach ($topic->fetch_array() as $k => $v) {
         </div>
     </div>
     <?php
-    $comments = $conn->query("SELECT f.*,u.first_name,u.last_name,u.username FROM forum_comments f inner join users u on u.id = f.user_id where f.topic_id = $id order by f.id asc");
+    $comments = $conn->query("SELECT f.*,u.first_name,u.last_name,u.username FROM forum_comments f inner join users u on u.id = f.user_id where f.topic_id = ".$_GET['id']." order by f.id asc");
     ?>
     <div class="card mb-4">
         <div class="card-body">
@@ -119,9 +119,8 @@ foreach ($topic->fetch_array() as $k => $v) {
             <div class="col-lg-12">
                 <form action="" id="manage-comment">
                     <div class="form-group">
-                        <input type="hidden" name="topic_id" value="<?php echo isset($id) ? $id : '' ?>">
-                        <textarea class="form-control jqte" name="comment" cols="30" rows="5"
-                                  placeholder="New Comment"></textarea>
+                        <input type="hidden" name="topic_id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>">
+                        <textarea class="form-control jqte" name="comment" cols="30" rows="5" placeholder="New Comment"></textarea>
                     </div>
                     <button class="btn btn-primary float-right">Save Comment</button>
                 </form>

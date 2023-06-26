@@ -52,7 +52,9 @@
                     <?php echo "Tracer Study" ?>
                     <hr>
 
-                    <h1>On Going Development</h1>
+                    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                    <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+
 
                 </div>
             </div>
@@ -60,61 +62,43 @@
     </div>
 </div>
 <script>
-    $('#manage-records').submit(function (e) {
-        e.preventDefault()
-        start_load()
-        $.ajax({
-            url: 'ajax.php?action=save_track',
-            data: new FormData($(this)[0]),
-            cache: false,
-            contentType: false,
-            processData: false,
-            method: 'POST',
-            type: 'POST',
-            success: function (resp) {
-                resp = JSON.parse(resp)
-                if (resp.status == 1) {
-                    alert_toast("Data successfully saved", 'success')
-                    setTimeout(function () {
-                        location.reload()
-                    }, 800)
-
-                }
-
-            }
-        })
-    })
-    $('#tracking_id').on('keypress', function (e) {
-        if (e.which == 13) {
-            get_person()
-        }
-    })
-    $('#check').on('click', function (e) {
-        get_person()
-    })
-
-    function get_person() {
-        start_load()
-        $.ajax({
-            url: 'ajax.php?action=get_pdetails',
-            method: "POST",
-            data: {tracking_id: $('#tracking_id').val()},
-            success: function (resp) {
-                if (resp) {
-                    resp = JSON.parse(resp)
-                    if (resp.status == 1) {
-                        $('#name').html(resp.name)
-                        $('#address').html(resp.address)
-                        $('[name="person_id"]').val(resp.id)
-                        $('#details').show()
-                        end_load()
-
-                    } else if (resp.status == 2) {
-                        alert_toast("Unknow tracking id.", 'danger');
-                        end_load();
+    const ctx = document.getElementById("myChart").getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["sunday", "monday", "tuesday",
+                "wednesday", "thursday", "friday", "saturday"],
+            datasets: [{
+                label: 'Last week',
+                backgroundColor: 'rgba(161, 198, 247, 1)',
+                borderColor: 'rgb(47, 128, 237)',
+                data: [3000, 4000, 2000, 5000, 8000, 9000, 2000],
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
                     }
-                }
+                }]
             }
-        })
-    }
+        },
+    });
+</script>
+<script>
+    const ctx = document.getElementById("myChart2").getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["rice", "yam", "tomato", "potato",
+                "beans", "maize", "oil"],
+            datasets: [{
+                label: 'food Items',
+                backgroundColor: 'rgba(161, 198, 247, 1)',
+                borderColor: 'rgb(47, 128, 237)',
+                data: [30, 40, 20, 50, 80, 90, 20],
+            }]
+        },
+    });
 </script>

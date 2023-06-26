@@ -28,6 +28,7 @@
 <link type="text/css" rel="stylesheet" href="assets/css/jquery-te-1.4.0.css">
 
 <script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/chart/chart.min.js"></script>
 <script src="assets/DataTables/datatables.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>

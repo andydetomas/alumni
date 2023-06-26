@@ -9,6 +9,8 @@
         foreach ($query as $key => $value) {
             $_SESSION['system'][$key] = $value;
         }
+
+        $qry_tracer = $conn->query("SELECT * FROM tracer_version WHERE status='ACTIVE' ORDER BY id DESC LIMIT 1")->fetch_assoc();
         header("Cache-Control: no cache");
         date_default_timezone_set('Asia/Manila');
     }
@@ -84,8 +86,18 @@
         line-height: 2;
     }
 
-    #switch_page {
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ced4da;
+    }
+
+    .switch_page {
         cursor: pointer;
+    }
+
+    .badge-custom {
+        color: white;
+        position: absolute;
+        font-size: 50%;
     }
 
 </style>
@@ -109,7 +121,10 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger nav-gallery" href="index.php?page=gallery">Featured Post</a></li>
                 <?php if (isset($_SESSION['login_id'])): ?>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger nav-market" href="index.php?page=market">Marketplace</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger nav-tracer" href="index.php?page=tracer">Tracer Study</a></li>
+                    <?php if ($_SESSION['login_type'] == 'ALUMNI' && isset($qry_tracer['id'])): ?> <!-- Only show trace for students and if there is a new version release -->
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger nav-tracer" href="index.php?page=tracer">Tracer Study
+                            <span class="badge bg-danger badge-pill badge-custom">!</span></a></li>
+                    <?php endif; ?>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger nav-careers" href="index.php?page=careers">Jobs</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger nav-forum" href="index.php?page=forum">Forums</a></li>
                 <?php endif; ?>
@@ -122,9 +137,9 @@
                             <a href="#" class="nav-link js-scroll-trigger" id="account_settings" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['login_first_name'] ?> <i
                                     class="fa fa-angle-down"></i></a>
-                            <div class="dropdown-menu" aria-labelledby="account_settings" style="left: -2.5em;">
+                            <div class="dropdown-menu" aria-labelledby="account_settings" style="left: -5.5em;">
                                 <?php if ($_SESSION['login_type'] != 'ALUMNI'): ?>
-                                <a class="dropdown-item" id="switch_page"><i class="fa fa-table"></i> Admin Dashboard</a>
+                                <a class="dropdown-item switch_page" id="switch_page"><i class="fa fa-table"></i> Admin Dashboard</a>
                                 <?php endif; if (isset($_SESSION['bio']['id'])): ?>
                                 <a class="dropdown-item" href="index.php?page=my_account" id="manage_my_account"><i class="fa fa-cog"></i> Manage Account</a>
                                 <?php endif; ?>

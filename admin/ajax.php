@@ -169,6 +169,12 @@ if ($action == "delete_reserve") {
         echo $save;
     }
 }
+if ($action == "survey") {
+    $save = $crud->save_survey();
+    if ($save) {
+        echo $save;
+    }
+}
 if ($action == "get_venue_report") {
     $get = $crud->get_venue_report();
     if ($get) {

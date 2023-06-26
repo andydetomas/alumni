@@ -527,8 +527,54 @@ Class Action
     function delete_market()
     {
         extract($_POST);
-        $delete = $this->db->query("DELETE FROM market where id = ".$id);
+        $delete = $this->db->query("DELETE FROM market where id = ".$id) ;
         if ($delete) {
+            return 1;
+        }
+    }
+
+    function save_survey()
+    {
+        extract($_POST);
+        $data = "user_id = '{$_SESSION['login_id']}' ";
+        $data .= ", tracer_version = '$tracer_version' ";
+        $data .= ", grad_course = '$grad_course' ";
+        $data .= ", grad_course_status = '$grad_course_status' ";
+
+        if($employment_status == 'true') {
+            $data .= ", cur_employed = 'EMPLOYED' ";
+            $data .= ", cur_job = '$cur_job' ";
+            $data .= ", cur_job_company = '$cur_job_company' ";
+            $data .= ", cur_job_find = '$cur_job_find' ";
+            $data .= ", cur_job_status  = '$cur_job_status ' ";
+            $data .= ", cur_job_salary = '$cur_job_salary' ";
+            $data .= ", cur_job_start = '$cur_job_start' ";
+            $data .= ", cur_job_end = '$cur_job_end' ";
+            $data .= ", award_job = '$award_job' ";
+            if(isset($cur_job_other)) {
+                $data .= ", cur_job_other = '$cur_job_other' ";
+            }
+        } else {
+            $data .= ", cur_employed = 'UNEMPLOYED' ";
+            $data .= ", cur_unemployed_reason = '$cur_unemployed_reason' ";
+        }
+
+        if($firstJobStatus == 'false') {
+            $data .= ", first_job  = '$first_job ' ";
+            $data .= ", first_job_status   = '$first_job_status  ' ";
+            if(isset($first_job_other)) {
+                $data .= ", first_job_other  = '$first_job_other ' ";
+            }
+        } else if ($firstJobStatus == 'true' && $employment_status == 'true'){
+            $data .= ", first_job  = '$cur_job ' ";
+            $data .= ", first_job_status   = '$cur_job_status  ' ";
+            if(isset($cur_job_other)) {
+                $data .= ", first_job_other  = '$cur_job_other ' ";
+            }
+        }
+
+        $save = $this->db->query("INSERT INTO tracer_survey set ".$data);
+        if ($save) {
             return 1;
         }
     }

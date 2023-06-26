@@ -105,7 +105,7 @@ if (isset($_GET['id'])) {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="text-center">
-                            <?php if (isset($_SESSION['login_id'])): ?>
+                            <?php if (isset($_SESSION['login_id']) && $_SESSION['login_type'] == 'ALUMNI'): ?>
                                 <?php if (in_array($_SESSION['login_id'], $cids)): ?>
                                     <span class="badge badge-success">You have committed to participate</span>
                                 <?php else: ?>

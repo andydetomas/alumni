@@ -100,7 +100,7 @@ if (isset($_GET['id'])) {
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12" id="content">
-                        <?php if (isset($_SESSION['login_id']) && $_SESSION['login_type'] != 'ADMIN1'): ?>
+                        <?php if (isset($_SESSION['login_id']) && $_SESSION['login_type'] == 'ALUMNI'): ?>
                         <h6 class="text-info">My Reservations: <?php echo empty($my_reservations) ? "No order placed yet" : $my_reservations. " pc/s" ?></h6>
                         <hr>
                         <?php endif; ?>
@@ -110,7 +110,7 @@ if (isset($_GET['id'])) {
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <div class="text-center">
-                            <?php if (isset($_SESSION['login_id']) && $_SESSION['login_type'] != 'ADMIN1'): ?>
+                            <?php if (isset($_SESSION['login_id']) && $_SESSION['login_type'] == 'ALUMNI'): ?>
                                 <?php if (!empty($my_reservations)): ?>
                                     <button class="btn btn-danger" id="cancel_reserve" data-id="<?php echo $_GET['id'] ?>" type="button">Cancel My Order</button>
                                     <button class="btn btn-primary" id="reserve" data-id="<?php echo $_GET['id'] ?>" type="button">Reserve Another?</button>

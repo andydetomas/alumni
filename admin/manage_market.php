@@ -1,7 +1,7 @@
 <?php include 'db_connect.php' ?>
 <?php
 if (isset($_GET['id'])) {
-    $qry = $conn->query("SELECT * FROM events where id= ".$_GET['id']);
+    $qry = $conn->query("SELECT * FROM product where id= ".$_GET['id']);
     foreach ($qry->fetch_array() as $k => $val) {
         $$k = $val;
     }
@@ -149,34 +149,46 @@ if (isset($_GET['id'])) {
                     <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
                     <div class="form-group row">
                         <div class="col-md-5">
-                            <label for="" class="control-label">Item Name</label>
-                            <input type="text" class="form-control" name="title"
-                                   value="<?php echo isset($title) ? $title : '' ?>" required>
+                            <label for="" class="control-label required">Merch Name</label>
+                            <input type="text" class="form-control" name="name"
+                                   value="<?php echo isset($name) ? $name : '' ?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <label for="" class="control-label required">Price</label>
+                            <input type="number" class="form-control" name="price"
+                                   value="<?php echo isset($price) ? $price : '' ?>" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="" class="control-label required">Quantity</label>
+                            <input type="number" class="form-control" name="quantity"
+                                   value="<?php echo isset($quantity) ? $quantity : '' ?>" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-5">
-                            <label for="" class="control-label">Release date</label>
-                            <input type="text" class="form-control datetimepicker" name="schedule"
-                                   value="<?php echo isset($schedule) ? date("Y-m-d H:i", strtotime($schedule)) : '' ?>"
+                            <label for="" class="control-label required">Ordering Is Valid Until</label>
+                            <input type="text" class="form-control datetimepicker" name="valid_until"
+                                   value="<?php echo isset($valid_until) ? date("Y-m-d H:i", strtotime($valid_until)) : '' ?>"
                                    required autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-10">
-                            <label for="" class="control-label">Description</label>
-                            <textarea name="content" id="content" class="form-control jqte" cols="30" rows="5"
-                                      required><?php echo isset($content) ? html_entity_decode($content) : '' ?></textarea>
+                            <label for="" class="control-label required">Description</label>
+                            <textarea name="description" id="content" class="form-control jqte" cols="30" rows="5"
+                                      required><?php echo isset($description) ? html_entity_decode($description) : '' ?></textarea>
                         </div>
                     </div>
                     <div class=" row form-group">
                         <div class="col-md-5">
-                            <label for="" class="control-label">Banner Image</label>
-                            <input type="file" class="form-control" name="banner" onchange="displayImg2(this,$(this))">
+                            <label for="" class="control-label">Merch Image</label>
+                            <input type="file" class="form-control" name="photo" onchange="displayImg2(this,$(this))">
                         </div>
 
                         <div class="col-md-5">
-                            <img src="<?php echo isset($banner) ? 'assets/uploads/'.$banner : '' ?>" alt=""
+                            <img src="<?php echo isset($photo) ? 'assets/uploads/'.$photo : '' ?>" alt=""
                                  id="banner-field">
                         </div>
                     </div>
@@ -217,7 +229,7 @@ if (isset($_GET['id'])) {
             type: 'POST',
             success: function (resp) {
                 if (resp == 1) {
-                    alert_toast("Data successfully saved", 'success')
+                    alert_toast("Merch successfully saved", 'success')
                     setTimeout(function () {
                         location.href = "index.php?page=market"
                     }, 1500)

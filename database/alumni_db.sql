@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2023 at 04:31 PM
+-- Generation Time: Jun 30, 2023 at 08:31 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,7 +39,7 @@ CREATE TABLE `alumnus_bio` (
   `email` varchar(250) NOT NULL,
   `connected_to` text NOT NULL,
   `avatar` text NOT NULL,
-  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
   `date_created` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -48,7 +48,22 @@ CREATE TABLE `alumnus_bio` (
 --
 
 INSERT INTO `alumnus_bio` (`id`, `user_id`, `firstname`, `middlename`, `lastname`, `gender`, `batch`, `course_id`, `email`, `connected_to`, `avatar`, `status`, `date_created`) VALUES
-(2, 3, 'John', '', 'Snow', 'Male', '2009', 1, 'snow@gmail.com', 'My Company', 'alumni.jpg', 'ACTIVE', '2020-10-15');
+(1, 2, 'Jonas', 'Greiser', 'Snow', 'Male', '2009', 1, 'snow@gmail.com', 'Google Inc', 'alumni.jpg', 'ACTIVE', '2020-10-15'),
+(2, 4, 'Willette', 'Letherbury', 'Danzey', 'Female', '2008', 10, 'danzey@gmail.com', 'Wikido', '1688142480_g1.jpg', 'ACTIVE', '2023-07-01'),
+(15, 80, 'Codee', 'Hatchell', 'Harradine', 'Male', '2004', 9, 'harradine@gmail.com', 'Jabberbean', '1688148060_g2.jpg', 'ACTIVE', '2023-07-01'),
+(16, 81, 'Shalna', 'Burdus', 'McGuinley', 'Female', '1994', 9, 'mcguinley@gmail.com', 'Livetube', '1688148120_g3.jpg', 'ACTIVE', '2023-07-01'),
+(17, 82, 'Korrie', 'Jadczak', 'Orpee', 'Female', '2006', 2, 'orpee@gmail.com', 'Twinte', '1688148180_g4.jpg', 'ACTIVE', '2023-07-01'),
+(18, 83, 'Ula', 'Niles', 'Coare', 'Female', '2001', 4, 'coare@gmail.com', 'Snaptags', '1688148240_g5.jpg', 'ACTIVE', '2023-07-01'),
+(19, 84, 'Merilyn', 'Meigh', 'Sanpere', 'Female', '1991', 2, 'sanpere@gmail.com', 'Babblestorm', '1688148300_g6.jpg', 'ACTIVE', '2023-07-01'),
+(20, 85, 'Eva', 'Lilly', 'Climson', 'Female', '2004', 1, 'climson@gmail.com', 'Wordware', '1688148360_g7.jpg', 'INACTIVE', '2023-07-01'),
+(21, 86, 'Cherin', 'Finnigan', 'Brosh', 'Female', '1992', 2, 'brosh@gmail.com', 'Zoovu', '1688148420_g8.jpg', 'ACTIVE', '2023-07-01'),
+(22, 87, 'Ash', 'Vicson', 'Garmans', 'Male', '2005', 1, 'garmans@gmail.com', 'Mymm', '1688148540_b1.jpg', 'ACTIVE', '2023-07-01'),
+(23, 88, 'Kurtis', 'Giabucci', 'Coundley', 'Male', '2008', 2, 'coundley@gmail.com', 'Facebook', '1688148600_b2.jpg', 'ACTIVE', '2023-07-01'),
+(24, 89, 'Denis', 'Hernik', 'Headingham', 'Male', '1999', 9, 'headingham@gmail.com', 'Gigazoom', '1688148600_b3.jpg', 'ACTIVE', '2023-07-01'),
+(25, 90, 'Garrett', 'Rummery', 'Fields', 'Male', '1999', 5, 'garrett@gmail.com', 'Oloo', '1688148720_b4.jpg', 'INACTIVE', '2023-07-01'),
+(26, 91, 'Matty', 'Lowater', 'Clouston', 'Male', '2001', 3, 'clouston@gmail.com', 'Makati Medical Center', '1688148780_b5.jpg', 'ACTIVE', '2023-07-01'),
+(27, 92, 'Adrian', 'Presho', 'Lemery', 'Male', '2001', 1, 'lemery@gmail.com', 'UP Diliman', '1688148840_b6.jpg', 'ACTIVE', '2023-07-01'),
+(28, 93, 'Tally', 'Cancelier', 'Chadd', 'Male', '2005', 10, 'chadd@gmail.com', 'Quinu', '1688148900_b9.jpg', 'ACTIVE', '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -71,8 +86,10 @@ CREATE TABLE `careers` (
 --
 
 INSERT INTO `careers` (`id`, `user_id`, `company`, `location`, `job_title`, `description`, `date_created`) VALUES
-(1, 3, 'IT Company', 'Home-Based', 'Web Developer', '&lt;p style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); margin-top: 1.5em; margin-bottom: 1.5em; line-height: 1.5; animation: 1000ms linear 0s 1 normal none running fadeInLorem;&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. In tellus integer feugiat scelerisque varius morbi enim. Orci eu lobortis elementum nibh tellus molestie nunc. Vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Lacus sed viverra tellus in hac habitasse platea dictumst vestibulum. Eleifend donec pretium vulputate sapien nec. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Quam adipiscing vitae proin sagittis nisl rhoncus. Sed viverra ipsum nunc aliquet bibendum. Enim ut sem viverra aliquet eget sit amet tellus. Integer feugiat scelerisque varius morbi enim nunc faucibus.&lt;/p&gt;&lt;p style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); margin-top: 1.5em; margin-bottom: 1.5em; line-height: 1.5; animation: 1000ms linear 0s 1 normal none running fadeInLorem;&quot;&gt;Viverra justo nec ultrices dui. Leo vel orci porta non pulvinar neque laoreet. Id semper risus in hendrerit gravida rutrum quisque non tellus. Sit amet consectetur adipiscing elit ut. Id neque aliquam vestibulum morbi blandit cursus risus. Tristique senectus et netus et malesuada. Amet aliquam id diam maecenas ultricies mi eget mauris. Morbi tristique senectus et netus et malesuada. Diam phasellus vestibulum lorem sed risus. Tempor orci dapibus ultrices in. Mi sit amet mauris commodo quis imperdiet. Quisque sagittis purus sit amet volutpat. Vehicula ipsum a arcu cursus. Ornare quam viverra orci sagittis eu volutpat odio facilisis. Id volutpat lacus laoreet non curabitur. Cursus euismod quis viverra nibh cras pulvinar mattis nunc. Id aliquet lectus proin nibh nisl condimentum id venenatis. Eget nulla facilisi etiam dignissim diam quis enim lobortis. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet.&lt;/p&gt;', '2020-10-15 14:14:27'),
-(2, 1, 'Sample Company', 'Sample location', 'IT Specialist', '&lt;p style=&quot;margin-top: 1.5em; margin-bottom: 1.5em; margin-right: unset; margin-left: unset; color: rgb(68, 68, 68); font-family: &amp;quot;Open Sans&amp;quot;, sans-serif; font-size: 16px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); line-height: 1.5; animation: 1000ms linear 0s 1 normal none running fadeInLorem;&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. In tellus integer feugiat scelerisque varius morbi enim. Orci eu lobortis elementum nibh tellus molestie nunc. Vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Lacus sed viverra tellus in hac habitasse platea dictumst vestibulum. Eleifend donec pretium vulputate sapien nec. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Quam adipiscing vitae proin sagittis nisl rhoncus. Sed viverra ipsum nunc aliquet bibendum. Enim ut sem viverra aliquet eget sit amet tellus. Integer feugiat scelerisque varius morbi enim nunc faucibus.&lt;/p&gt;&lt;p style=&quot;margin-top: 1.5em; margin-bottom: 1.5em; margin-right: unset; margin-left: unset; color: rgb(68, 68, 68); font-family: &amp;quot;Open Sans&amp;quot;, sans-serif; font-size: 16px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); line-height: 1.5; animation: 1000ms linear 0s 1 normal none running fadeInLorem;&quot;&gt;Viverra justo nec ultrices dui. Leo vel orci porta non pulvinar neque laoreet. Id semper risus in hendrerit gravida rutrum quisque non tellus. Sit amet consectetur adipiscing elit ut. Id neque aliquam vestibulum morbi blandit cursus risus. Tristique senectus et netus et malesuada. Amet aliquam id diam maecenas ultricies mi eget mauris. Morbi tristique senectus et netus et malesuada. Diam phasellus vestibulum lorem sed risus. Tempor orci dapibus ultrices in. Mi sit amet mauris commodo quis imperdiet. Quisque sagittis purus sit amet volutpat. Vehicula ipsum a arcu cursus. Ornare quam viverra orci sagittis eu volutpat odio facilisis. Id volutpat lacus laoreet non curabitur. Cursus euismod quis viverra nibh cras pulvinar mattis nunc. Id aliquet lectus proin nibh nisl condimentum id venenatis. Eget nulla facilisi etiam dignissim diam quis enim lobortis. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet.&lt;/p&gt;', '2020-10-15 15:05:37');
+(5, 1, 'San Miguel Holdings Corp.', 'Manila City', 'Finance Analyst', '&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;/p&gt;&lt;span style=&quot;font-size:12px;font-weight: var(--zdj8ld48);&quot;&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;&lt;span style=&quot;font-weight: var(--zdj8ld48); font-size: 12px;&quot;&gt;JOB DESCRIPTION:&lt;/span&gt;&lt;/p&gt;&lt;ul style=&quot;margin-bottom: var(--zdj8ld4); color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;General Ledger Maintenance&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;External Reporting&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Tax Compliance&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Fixed Assets&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Payables Processing&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Account schedule preparation and analysis&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Bank reconciliation&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;General Audit&lt;/li&gt;&lt;/ul&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;&lt;span style=&quot;font-weight: var(--zdj8ld48); font-size: 12px;&quot;&gt;QUALIFICATIONS:&lt;/span&gt;&lt;/p&gt;&lt;ul style=&quot;margin-bottom: var(--zdj8ld4); color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Graduate of BS Accountancy;&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Must be a Certified Public Accountant;&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Required skill(s): SAP.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;With 1-2 years&rsquo; experience is required for this position;&lt;/li&gt;&lt;/ul&gt;&lt;/span&gt;', '2023-07-01 01:43:49'),
+(6, 1, 'Power Mac Center', 'Zamboanga City', 'Marketing Officer', '&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;/p&gt;&lt;span style=&quot;font-size:12px;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif;&quot;&gt;&lt;span style=&quot;font-size: 12px; margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif;&quot;&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;Plans and executes year-long campaigns and programs following brand guidelines. He/She safeguards internal and external branding on all channels and creates avenues to strengthen the company branding.&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;&lt;span style=&quot;font-weight: var(--zdj8ld48); font-size: 12px;&quot;&gt;ROLES AND RESPONSIBILITIES&lt;/span&gt;&lt;/p&gt;&lt;ul style=&quot;margin-bottom: var(--zdj8ld4); color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Researches and analyses market trends and demands, competitor offerings, demographics and other information that affects marketing strategies.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Creates Marketing Plans for the assigned teams while considering the approved budget.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Ensures implementation and effectivity of Marketing Campaigns and Demand Generation Programs through close monitoring of activities and proper coordination with all concerned teams.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Works with accredited Suppliers and ensures that brand guidelines are being followed.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Liaises with Stakeholders and vendors to promote success of activities.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;Handles external communications and appearances to represent the Company in media engagements and the like.&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 12px;&quot;&gt;&lt;span style=&quot;font-weight: var(--zdj8ld48); font-size: 12px;&quot;&gt;JOB REQUIREMENTS&lt;/span&gt;&lt;/p&gt;&lt;ul style=&quot;margin-bottom: var(--zdj8ld4); color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;University Degree preferably of any four-year Business course or&amp;nbsp;equivalent.&amp;nbsp;&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda); font-size: 12px;&quot;&gt;With at least 1 year experience in Brand Management, Event Management, Advertising/Media Planning, Customer Service Practices, Marketing Research, Communications, Creative Planning and Content Writing.&lt;/li&gt;&lt;/ul&gt;&lt;/span&gt;', '2023-07-01 01:44:28'),
+(7, 1, 'SM Investments Corporation', 'Makati City', 'Accounting Assistant', '&lt;span style=&quot;font-size:12px;&quot;&gt;DISBURSEMENT PROCESS&lt;ul style=&quot;font-size:12px;&quot;&gt;&lt;li style=&quot;font-size:12px;&quot;&gt;Checks and validates invoices/bills, Statement of Accounts, petty cash vouchers with supporting documents, payroll entries.&lt;/li&gt;&lt;li style=&quot;font-size:12px;&quot;&gt;Prepares cash disbursement/payment voucher with valid attachment.&lt;/li&gt;&lt;li style=&quot;font-size:12px;&quot;&gt;Post entries in the Cash Disbursement Books, General Ledgers and Purchase Books and subsidiary books&lt;/li&gt;&lt;/ul&gt;&lt;p style=&quot;font-size:12px;&quot;&gt;REPORTS&lt;/p&gt;&lt;ul style=&quot;margin-bottom: var(--zdj8ld4);&quot;&gt;&lt;li style=&quot;font-size:12px;&quot;&gt;Prepares Weekly Cash Position Reports&lt;/li&gt;&lt;li style=&quot;font-size:12px;&quot;&gt;Prepares Summary of Construction in Progress&lt;/li&gt;&lt;li style=&quot;font-size:12px;&quot;&gt;Prepares monthly returns &ndash; EWT &amp;amp; attachments, Withholding Tax -Compensation Returns, VAT &amp;amp; attachments&lt;/li&gt;&lt;li style=&quot;font-size:12px;&quot;&gt;Prepares various schedules for Financial Statement Analysis&lt;/li&gt;&lt;/ul&gt;&lt;/span&gt;', '2023-07-01 01:45:24'),
+(8, 2, 'Security Bank Corporation', 'Makati City', 'Customer Advisor Staff ', '&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;As a&amp;nbsp;&lt;span style=&quot;font-weight: var(--zdj8ld48);&quot;&gt;Customer Advisor&lt;/span&gt;, you will&amp;nbsp;handle marketing, bank operations, and relationship and portfolio management responsibilities. When it comes to career growth, it is an opportunity to get valuable corporate experience while learning from seasoned veterans of a highly competitive field.&lt;/p&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;As a member of the Branch Banking group, you will be at the forefront of giving personalized and quality service to our clients. By managing and growing the existing portfolio of the branch, the Customer Advisor will be instrumental in ensuring the efficiency of our branch business.&lt;/p&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;span style=&quot;font-weight: var(--zdj8ld48);&quot;&gt;How will you contribute&lt;/span&gt;&lt;/p&gt;&lt;ul style=&quot;margin-bottom: var(--zdj8ld4); color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;Managing and growing the existing portfolio of the branch by cross-selling and in-house selling of the bank&amp;#x2019;s products and services.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;Assessing customer needs and ensuring prompt and efficient service delivery in compliance with the bank&rsquo;s service standards.&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;Processing account opening of new accounts, renewal, termination, and payment of matured placements.&lt;/li&gt;&lt;/ul&gt;&lt;p style=&quot;margin-bottom: var(--zdj8ld4); margin-top: var(--zdj8ld4); padding: 0px; color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;span style=&quot;font-weight: var(--zdj8ld48);&quot;&gt;What we&amp;#x2019;re looking for&lt;/span&gt;&lt;/p&gt;&lt;ul style=&quot;margin-bottom: var(--zdj8ld4); color: rgb(46, 56, 73); font-family: Roboto, &amp;quot;Helvetica Neue&amp;quot;, HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 16px;&quot;&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;Graduate of a Bachelor&rsquo;s Degree&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;With at least 1-year branch banking or related experience handling new account transactions&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;Experience in cross-selling of bank products&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;Able to understand and analyze numerical information and to make the right conclusions and decisions&lt;/li&gt;&lt;li style=&quot;list-style: disc; margin-left: calc(1 * var(--zdj8ld4)); padding-bottom: var(--zdj8lda);&quot;&gt;Must have good interpersonal skills, negotiation skills, and a strong customer service orientation&lt;/li&gt;&lt;/ul&gt;', '2023-07-01 01:50:57');
 
 -- --------------------------------------------------------
 
@@ -91,7 +108,16 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `course`, `about`) VALUES
-(1, 'BS Information Technology', 'Sample');
+(1, 'BS Education', ''),
+(2, 'BS Information Technology', ''),
+(3, 'BS Nursing', ''),
+(4, 'BS Electrical Engineering', ''),
+(5, 'BS Civil Engineering', ''),
+(6, 'BS Chemistry', ''),
+(7, 'BS Social Work', ''),
+(8, 'BS Mechanical Engineering', ''),
+(9, 'BS Architecture', ''),
+(10, 'BA Political Science', '');
 
 -- --------------------------------------------------------
 
@@ -114,8 +140,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `user_id`, `title`, `content`, `schedule`, `banner`, `date_created`) VALUES
-(1, 1, 'Charity Fun Run 2023', '&lt;p style=&quot;margin-bottom: 15px; color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; padding: 0px; text-align: justify;&quot;&gt;Cras a est hendrerit, egestas urna quis, ullamcorper elit. Nullam a felis eget dolor vulputate vehicula. In hac habitasse platea dictumst. Nunc est urna, gravida sit amet ligula ut, aliquam fermentum lorem. Vestibulum non suscipit velit, in rhoncus orci. Vivamus pulvinar quam nec leo semper facilisis quis eu magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum lectus lorem, iaculis sed nunc nec, lacinia auctor risus.&lt;/p&gt;&lt;p style=&quot;margin-bottom: 15px; color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; padding: 0px; text-align: justify;&quot;&gt;Aenean elementum, risus eget rutrum dapibus, tellus leo eleifend leo, et mattis turpis quam eu turpis. Suspendisse commodo placerat tellus, quis faucibus metus euismod sed. Cras vitae risus in felis dignissim fermentum. Morbi aliquam nisi ipsum, id aliquam tortor congue eu. Sed fringilla convallis augue, et vulputate ante convallis vitae. Integer lacinia lacus at vehicula finibus. Nullam ultrices turpis dui, volutpat pulvinar augue placerat in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis quam metus, sollicitudin a lectus non, tincidunt sagittis odio.&lt;/p&gt;', '2023-08-15 10:00:00', 'funrun.jpg', '2020-10-16 09:51:55'),
-(2, 1, 'Sports Festival', '&lt;p style=&quot;margin-bottom: 15px; color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; padding: 0px; text-align: justify;&quot;&gt;Cras a est hendrerit, egestas urna quis, ullamcorper elit. Nullam a felis eget dolor vulputate vehicula. In hac habitasse platea dictumst. Nunc est urna, gravida sit amet ligula ut, aliquam fermentum lorem. Vestibulum non suscipit velit, in rhoncus orci. Vivamus pulvinar quam nec leo semper facilisis quis eu magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum lectus lorem, iaculis sed nunc nec, lacinia auctor risus.&lt;/p&gt;&lt;p style=&quot;margin-bottom: 15px; color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; padding: 0px; text-align: justify;&quot;&gt;Aenean elementum, risus eget rutrum dapibus, tellus leo eleifend leo, et mattis turpis quam eu turpis. Suspendisse commodo placerat tellus, quis faucibus metus euismod sed. Cras vitae risus in felis dignissim fermentum. Morbi aliquam nisi ipsum, id aliquam tortor congue eu. Sed fringilla convallis augue, et vulputate ante convallis vitae. Integer lacinia lacus at vehicula finibus. Nullam ultrices turpis dui, volutpat pulvinar augue placerat in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis quam metus, sollicitudin a lectus non, tincidunt sagittis odio.&lt;/p&gt;', '2023-12-14 10:00:00', 'sportsfest.jpg', '2023-10-10 09:51:55');
+(1, 1, 'Sports Fest 2023', 'We are holding a sports program in our school. In which we would like to you as a participant and guess. And we want you to make your school team part of our Alumni program. Of course, this program will make the relationship between our students and schools very pleasant. So we are looking forward to your participation.&nbsp;', '2023-11-23 01:02:00', '1688144640_sportsfest.jpg', '2023-07-01 01:04:41'),
+(8, 1, 'Charity Fun Run 2023', 'Looking for an exciting way to get involved with your alma mater? Join us at the Alumni Fun Run this year 2023 and help raise money for a great cause! Register now and run, walk or cycle in support of those most affected by the pandemic.&amp;nbsp;', '2023-12-13 09:00:00', '1688145240_funrun.jpg', '2023-07-01 01:14:36'),
+(9, 1, 'WMSU Music Festival', '&lt;span style=&quot;font-family: Roboto, sans-serif; font-size: 18px;&quot;&gt;Several Filipino musical acts, including Ben&amp;amp;Ben and Zack Tabudlo, are performing on one concert stage this summer at WMSU Music Festival 2023, happening on Septermber 2023, at the WMSU field, Zamboanga City. Fifteen of the local top musical acts will gather in the hotly anticipated day-to-night spectacle that features both seasoned and upcoming artists.&lt;/span&gt;', '2023-09-21 18:00:00', '1688145720_ben-zack.jpg', '2023-07-01 01:22:06');
 
 -- --------------------------------------------------------
 
@@ -134,7 +161,9 @@ CREATE TABLE `event_commits` (
 --
 
 INSERT INTO `event_commits` (`id`, `event_id`, `user_id`) VALUES
-(1, 1, 3);
+(12, 9, 86),
+(13, 1, 88),
+(14, 9, 87);
 
 -- --------------------------------------------------------
 
@@ -155,8 +184,10 @@ CREATE TABLE `forum_comments` (
 --
 
 INSERT INTO `forum_comments` (`id`, `user_id`, `topic_id`, `comment`, `date_created`) VALUES
-(1, 3, 3, 'Sample updated Comment', '2020-10-15 15:46:03'),
-(3, 1, 3, 'Sample', '2020-10-16 08:48:02');
+(16, 2, 8, 'I am not supporting the use of AI!', '2023-07-01 01:54:15'),
+(17, 86, 9, 'Gcash as the top fintech company in PH? Meh. The work culture there is toxic!', '2023-07-01 02:20:22'),
+(18, 88, 9, 'I think google should be included on the list as well. What do you think?', '2023-07-01 02:21:52'),
+(19, 87, 9, 'Universities should be also included on the list.... not only private corporate companies', '2023-07-01 02:23:43');
 
 -- --------------------------------------------------------
 
@@ -177,9 +208,8 @@ CREATE TABLE `forum_topics` (
 --
 
 INSERT INTO `forum_topics` (`id`, `user_id`, `title`, `description`, `date_created`) VALUES
-(2, 3, 'Sample Topic 2', '&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; text-align: justify;&quot;&gt;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&lt;/span&gt;', '2020-10-15 15:20:51'),
-(3, 3, 'Sample Topic 3', '&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; text-align: justify;&quot;&gt;Vivamus gravida nunc orci. Proin ut tristique odio. Nulla suscipit ipsum arcu, a luctus lorem vulputate et. Maecenas magna lorem, tempor id ultrices id, vehicula eu diam. Aliquam erat volutpat. Praesent in sem tincidunt, mattis odio nec, ultrices justo. Vivamus sit amet sapien ornare tortor porttitor congue vel et lorem. In interdum eget metus ut sagittis. In accumsan nec purus vel ornare. Quisque non scelerisque libero, et aliquam risus. Mauris tincidunt ullamcorper efficitur. Nullam venenatis in massa et elementum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In mollis, tortor sed pellentesque ultrices, sem sem interdum lectus, a laoreet nulla lacus at risus. Ut placerat orci at enim fermentum, eget pretium ante pharetra. Nam id nunc congue augue feugiat egestas.&lt;/span&gt;', '2020-10-15 15:22:30'),
-(4, 1, 'Topic by Admin', '&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; font-weight: bolder; margin: 0px; padding: 0px; text-align: justify;&quot;&gt;Lorem Ipsum&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; text-align: justify;&quot;&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/span&gt;', '2020-10-16 08:31:45');
+(8, 1, 'The Future of AI - Artificial Intelligence', '&lt;span style=&quot;font-size:12px;color: rgb(48, 48, 48); font-family: Lato, sans-serif;&quot;&gt;The digital revolution has already changed how people live, work, and communicate. And it&rsquo;s only just getting started. But the same technologies that have the potential to help billions of people live happier, healthier, and more productive lives are also creating new challenges for citizens and governments around the world. From election meddling to data breaches and cyberattacks, recent events have shown that technology is changing how we think about privacy, national security, and maybe even democracy itself.&amp;nbsp;&lt;/span&gt;', '2023-07-01 01:53:36'),
+(9, 1, 'Best Place to Work in PH', 'Professional networking platform LinkedIn released its third annual list of top companies list on Wednesday, April 19, composed of firms from sectors such as information and technology (IT), financial technology (fintech) and consumer goods. IT services and consulting firm Accenture was named the top company, while fintech giants Mynt (GCash) and Maya followed suit to round up the frontrunners.&amp;nbsp;', '2023-07-01 01:56:30');
 
 -- --------------------------------------------------------
 
@@ -199,11 +229,11 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`id`, `about`, `path`, `created`) VALUES
-(1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed massa eget ipsum interdum dignissim id eu leo. Fusce eget congue sapien. Aliquam sit amet elit enim. Sed finibus orci risus, at porta nunc pretium vel. Pellentesque tincidunt placerat ipsum id venenatis. Cras eleifend, metus ut faucibus pretium, urna odio lacinia justo, vitae vehicula elit purus feugiat lectus. Nulla hendrerit suscipit elementum', 'gallery-1.jpg', '2020-10-15 13:08:27'),
-(2, 'Phasellus non venenatis metus. Ut semper, nunc id maximus convallis, arcu leo tempus lacus, id tincidunt purus velit nec tellus. Nulla sit amet nibh dictum, blandit augue eleifend, sagittis lorem', 'gallery-2.jpeg', '2020-10-15 13:15:37'),
-(3, 'Fusce dictum consectetur semper. Etiam dignissim in augue ut tempor. Proin rhoncus vestibulum mollis. Integer pellentesque ullamcorper turpis. Quisque turpis lacus, iaculis id sodales tincidunt', 'gallery-3.jpg', '2020-10-15 13:15:45'),
-(4, 'Mauris augue felis, mattis sit amet sodales nec, pellentesque eu elit. Aliquam ultrices sem eget purus laoreet suscipit. Integer nec risus iaculis, sollicitudin velit ac, maximus ante', 'gallery-4.jpg', '2020-10-15 13:15:53'),
-(5, 'Curabitur ut malesuada orci. In sed rhoncus eros, sit amet malesuada tortor. Phasellus lobortis, nisl et euismod volutpat, orci odio malesuada neque, mollis iaculis erat ante non ante. Nulla tempus at leo ac condimentum. Morbi vitae malesuada ex', 'gallery-5.jpg', '2020-10-15 13:16:07');
+(1, 'Andrea B Phasellus non venenatis metus. Ut semper, nunc id maximus convallis, arcu leo tempus lacus, id tincidunt purus velit nec tellus. Nulla sit amet nibh dictum, blandit augue eleifend, sagittis lorem', 'gallery-1.jpg', '2020-10-15 13:15:37'),
+(2, 'Fusce dictum consectetur semper. Etiam dignissim in augue ut tempor. Proin rhoncus vestibulum mollis. Integer pellentesque ullamcorper turpis. Quisque turpis lacus, iaculis id sodales tincidunt', 'gallery-3.jpg', '2020-10-15 13:15:45'),
+(3, 'Mauris augue felis, mattis sit amet sodales nec, pellentesque eu elit. Aliquam ultrices sem eget purus laoreet suscipit. Integer nec risus iaculis, sollicitudin velit ac, maximus ante', 'gallery-4.jpg', '2020-10-15 13:15:53'),
+(4, 'Curabitur ut malesuada orci. In sed rhoncus eros, sit amet malesuada tortor. Phasellus lobortis, nisl et euismod volutpat, orci odio malesuada neque, mollis iaculis erat ante non ante. Nulla tempus at leo ac condimentum. Morbi vitae malesuada ex', 'gallery-5.jpg', '2020-10-15 13:16:07'),
+(5, ' Ut semper, nunc id maximus convallis, arcu leo tempus lacus, id tincidunt purus velit nec tellus. Nulla sit amet nibh dictum, blandit augue eleifend, sagittis lorem', 'gallery-2.jpeg', '2023-06-28 01:56:56');
 
 -- --------------------------------------------------------
 
@@ -253,7 +283,7 @@ CREATE TABLE `job_type` (
 --
 
 INSERT INTO `job_type` (`id`, `name`, `status`) VALUES
-(1, 'Accountant', 'ACTIVE'),
+(1, 'Other', 'ACTIVE'),
 (2, 'Architect', 'ACTIVE'),
 (3, 'Engineer', 'ACTIVE'),
 (4, 'Nurse', 'ACTIVE'),
@@ -263,6 +293,54 @@ INSERT INTO `job_type` (`id`, `name`, `status`) VALUES
 (8, 'Baker', 'ACTIVE'),
 (9, 'Military', 'ACTIVE'),
 (10, 'Pilot', 'ACTIVE');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(30) NOT NULL,
+  `user_id` int(30) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `description` text NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `valid_until` datetime NOT NULL,
+  `photo` text NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `user_id`, `name`, `description`, `price`, `quantity`, `valid_until`, `photo`, `date_created`) VALUES
+(1, 1, 'Alumni Shirt 2023', 'Shirts are available in different sizes. All are encouraged to pair the alumni shirt with khaki pants for the parade. Thank you and see you all on August!&lt;p&gt;&lt;br&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Open Sans&amp;quot;, Arial, sans-serif; text-align: justify;&quot;&gt;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.&lt;/span&gt;&lt;/p&gt;&lt;/p&gt;', 550, 300, '2023-08-24 14:07:00', 'alumni-shirt.jpg', '2023-06-11 14:09:20'),
+(7, 1, 'Alumni Mug', '&lt;p&gt;&lt;span style=&quot;font-size:16px;color: rgb(0, 0, 0); font-family: Montserrat, Arial, Helvetica, &amp;quot;sans-serif&amp;quot;;&quot;&gt;Bean here, learned that! Enjoy coffee, tea, or anything in between in this campus&amp;nbsp; alumni mug. Ceramic mug features a comfortable &amp;#x2019;C&amp;#x2019; shaped handle, a smooth glazed finish, and the school name with an &amp;#x2019;Alumni&amp;#x2019; headline printed on the front. 15 oz. capacity.&lt;/span&gt;&lt;/p&gt;', 230, 400, '2023-10-31 02:27:00', '1688149680_cup.jpg', '2023-07-01 02:28:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_commits`
+--
+
+CREATE TABLE `product_commits` (
+  `id` int(30) NOT NULL,
+  `product_id` int(30) NOT NULL,
+  `user_id` int(30) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `status` enum('RESERVED','CANCELLED') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_commits`
+--
+
+INSERT INTO `product_commits` (`id`, `product_id`, `user_id`, `quantity`, `status`) VALUES
+(47, 1, 86, 3, 'RESERVED'),
+(48, 1, 88, 4, 'RESERVED');
 
 -- --------------------------------------------------------
 
@@ -295,18 +373,24 @@ INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `cover_img`, `a
 CREATE TABLE `tracer_survey` (
   `id` int(11) NOT NULL,
   `user_id` int(30) NOT NULL,
-  `first_job` int(30) NOT NULL,
+  `first_job` int(30) DEFAULT NULL,
   `first_job_other` text NOT NULL,
-  `first_job_status` enum('ACTIVE','INACTIVE') NOT NULL,
-  `cur_job` int(30) NOT NULL,
+  `first_job_status` int(30) DEFAULT NULL,
+  `cur_employed` enum('EMPLOYED','UNEMPLOYED') NOT NULL,
+  `cur_unemployed_reason` text NOT NULL,
+  `cur_job` int(30) DEFAULT NULL,
   `cur_job_other` text NOT NULL,
-  `cur_job_classification` int(30) NOT NULL,
-  `cur_job_date` year(4) NOT NULL,
-  `cur_job_status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `cur_job_company` int(11) NOT NULL,
+  `cur_job_find` text NOT NULL,
+  `cur_job_status` int(30) DEFAULT NULL,
+  `cur_job_salary` text NOT NULL,
+  `cur_job_start` year(4) NOT NULL,
+  `cur_job_end` year(4) NOT NULL,
   `grad_course` text NOT NULL,
+  `grad_course_status` text NOT NULL,
   `award_job` text NOT NULL,
   `tracer_version` int(30) NOT NULL,
-  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'ACTIVE'
+  `date_created` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -334,18 +418,33 @@ CREATE TABLE `users` (
   `last_name` varchar(200) NOT NULL,
   `username` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `type` enum('ADMIN','OFFICER','ALUMNI','') NOT NULL DEFAULT 'ALUMNI',
-  `auto_generated_pass` text NOT NULL
+  `type` enum('ADMIN','OFFICER','ALUMNI','') NOT NULL DEFAULT 'ALUMNI'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `username`, `password`, `type`, `auto_generated_pass`) VALUES
-(1, 'Admin', '', '', 'admin', '0192023a7bbd73250516f069df18b500', 'ADMIN', ''),
-(3, 'John', '', 'Snow', 'snow@gmail.com', '3cc93e9a6741d8b40460457139cf8ced', 'OFFICER', ''),
-(4, 'Amy', 'Smith', 'Taylor', 'amy@gmail.com', '3cc93e9a6741d8b40460457139cf8ced', 'OFFICER', '');
+INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `username`, `password`, `type`) VALUES
+(1, 'Admin', '', '', 'admin', '0192023a7bbd73250516f069df18b500', 'ADMIN'),
+(2, 'Jonas', 'Greiser', 'Snow', 'jonas@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(3, 'Amy', 'Smith', 'Taylor', 'amy@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'OFFICER'),
+(4, 'Willette', 'Letherbury', 'Danzey', 'danzey@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(5, 'Rose', 'Cruz', 'Sebastian', 'rose@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'OFFICER'),
+(80, 'Codee', 'Hatchell', 'Harradine', 'harradine@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(81, 'Shalna', 'Burdus', 'McGuinley', 'mcguinley@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(82, 'Korrie', 'Jadczak', 'Orpee', 'orpee@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(83, 'Ula', 'Niles', 'Coare', 'coare@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(84, 'Merilyn', 'Meigh', 'Sanpere', 'sanpere@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(85, 'Eva', 'Lilly', 'Climson', 'climson@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(86, 'Cherin', 'Finnigan', 'Brosh', 'brosh@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(87, 'Ash', 'Vicson', 'Garmans', 'garmans@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(88, 'Kurtis', 'Giabucci', 'Coundley', 'coundley@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(89, 'Denis', 'Hernik', 'Headingham', 'headingham@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(90, 'Garrett', 'Rummery', 'Fields', 'garrett@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(91, 'Matty', 'Lowater', 'Clouston', 'clouston@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(92, 'Adrian', 'Presho', 'Lemery', 'lemery@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
+(93, 'Tally', 'Cancelier', 'Chadd', 'chadd@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI');
 
 --
 -- Indexes for dumped tables
@@ -356,6 +455,7 @@ INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `username`,
 --
 ALTER TABLE `alumnus_bio`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `course_alumni` (`course_id`),
   ADD KEY `user_alumni` (`user_id`);
 
 --
@@ -420,6 +520,21 @@ ALTER TABLE `job_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_user` (`user_id`);
+
+--
+-- Indexes for table `product_commits`
+--
+ALTER TABLE `product_commits`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_commit` (`user_id`),
+  ADD KEY `product_commit` (`product_id`);
+
+--
 -- Indexes for table `system_settings`
 --
 ALTER TABLE `system_settings`
@@ -433,8 +548,9 @@ ALTER TABLE `tracer_survey`
   ADD KEY `first_job` (`first_job`),
   ADD KEY `cur_job` (`cur_job`),
   ADD KEY `tracer_version` (`tracer_version`),
-  ADD KEY `job_classification` (`cur_job_classification`),
-  ADD KEY `tracer_user` (`user_id`);
+  ADD KEY `tracer_user` (`user_id`),
+  ADD KEY `cur_job_classification` (`cur_job_status`),
+  ADD KEY `first_job_classification` (`first_job_status`);
 
 --
 -- Indexes for table `tracer_version`
@@ -456,49 +572,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `alumnus_bio`
 --
 ALTER TABLE `alumnus_bio`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `careers`
 --
 ALTER TABLE `careers`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `event_commits`
 --
 ALTER TABLE `event_commits`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `forum_comments`
 --
 ALTER TABLE `forum_comments`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `forum_topics`
 --
 ALTER TABLE `forum_topics`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `job_classification`
@@ -513,6 +629,18 @@ ALTER TABLE `job_type`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `product_commits`
+--
+ALTER TABLE `product_commits`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
 -- AUTO_INCREMENT for table `system_settings`
 --
 ALTER TABLE `system_settings`
@@ -522,19 +650,19 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `tracer_survey`
 --
 ALTER TABLE `tracer_survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tracer_version`
 --
 ALTER TABLE `tracer_version`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- Constraints for dumped tables
@@ -544,7 +672,8 @@ ALTER TABLE `users`
 -- Constraints for table `alumnus_bio`
 --
 ALTER TABLE `alumnus_bio`
-  ADD CONSTRAINT `user_alumni` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `course_alumni` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+  ADD CONSTRAINT `user_alumni` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `careers`
@@ -579,12 +708,26 @@ ALTER TABLE `forum_topics`
   ADD CONSTRAINT `user_forum` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `product_commits`
+--
+ALTER TABLE `product_commits`
+  ADD CONSTRAINT `product_commit` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `users_commit` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `tracer_survey`
 --
 ALTER TABLE `tracer_survey`
   ADD CONSTRAINT `cur_job` FOREIGN KEY (`cur_job`) REFERENCES `job_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `cur_job_classification` FOREIGN KEY (`cur_job_status`) REFERENCES `job_classification` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `first_job` FOREIGN KEY (`first_job`) REFERENCES `job_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `job_classification` FOREIGN KEY (`cur_job_classification`) REFERENCES `job_classification` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `first_job_classification` FOREIGN KEY (`first_job_status`) REFERENCES `job_classification` (`id`),
   ADD CONSTRAINT `tracer_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `tracer_version` FOREIGN KEY (`tracer_version`) REFERENCES `tracer_version` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;

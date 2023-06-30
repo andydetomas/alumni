@@ -14,15 +14,15 @@
                         <div class="card-body">
                             <input type="hidden" name="id">
                             <div class="form-group">
-                                <label for="" class="control-label">Image</label>
-                                <input type="file" class="form-control" name="img" onchange="displayImg(this,$(this))">
+                                <label for="" class="control-label required">Image</label>
+                                <input type="file" class="form-control" name="path" onchange="displayImg(this,$(this))" required>
                             </div>
                             <div class="form-group">
-                                <img src="<?php echo is_file('assets/uploads/gallery/img_') ?>" alt="" id="cimg">
+                                <img src="<?php echo is_file('assets/uploads/gallery/') ?>" alt="" id="cimg">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Short Description</label>
-                                <textarea class="form-control" name='about'></textarea>
+                                <label class="control-label required">Short Description</label>
+                                <textarea class="form-control" name='about' required></textarea>
                             </div>
 
                         </div>
@@ -46,7 +46,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <b>gallery List</b>
+                        <b>Gallery List</b>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-hover">
@@ -61,23 +61,14 @@
                             <tbody>
                             <?php
                             $i = 1;
-                            $img = [];
                             $fpath = 'assets/uploads/gallery';
-                            $files = is_dir($fpath) ? scandir($fpath) : [];
-                            foreach ($files as $val) {
-                                if (! in_array($val, ['.', '..'])) {
-                                    $n = explode('_', $val);
-                                    $img[$n[0]] = $val;
-                                }
-                            }
                             $gallery = $conn->query("SELECT * FROM gallery order by id asc");
                             while ($row = $gallery->fetch_assoc()):
                                 ?>
                                 <tr>
                                     <td class="text-center"><?php echo $i++ ?></td>
                                     <td class="">
-                                        <img src="<?php echo isset($img[$row['id']]) && is_file($fpath.'/'.$img[$row['id']]) ? $fpath.'/'.$img[$row['id']] : '' ?>"
-                                             class="gimg" alt="">
+                                        <img src="<?php echo isset($row['path']) ? $fpath.'/'.$row['path'] : '' ?>" alt="" class="gimg">
                                     </td>
                                     <td class="">
                                         <?php echo $row['about'] ?>
@@ -86,11 +77,10 @@
                                         <button class="btn btn-sm btn-primary edit_gallery" type="button"
                                                 data-id="<?php echo $row['id'] ?>"
                                                 data-about="<?php echo $row['about'] ?>"
-                                                data-src="<?php echo isset($img[$row['id']]) && is_file($fpath.'/'.$img[$row['id']]) ? $fpath.'/'.$img[$row['id']] : '' ?>">
+                                                data-src="<?php echo isset($row['path']) ? $fpath.'/'.$row['path'] : '' ?>">
                                             Edit
                                         </button>
-                                        <button class="btn btn-sm btn-danger delete_gallery" type="button"
-                                                data-id="<?php echo $row['id'] ?>">Delete
+                                        <button class="btn btn-sm btn-danger delete_gallery" type="button" data-id="<?php echo $row['id'] ?>">Delete
                                         </button>
                                     </td>
                                 </tr>
@@ -147,17 +137,13 @@
             type: 'POST',
             success: function (resp) {
                 if (resp == 1) {
-                    alert_toast("Data successfully added", 'success')
+                    alert_toast("Data successfully saved", 'success')
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
 
                 } else if (resp == 2) {
-                    alert_toast("Data successfully updated", 'success')
-                    setTimeout(function () {
-                        location.reload()
-                    }, 1500)
-
+                    alert_toast("Data encountered an error while saving", 'error')
                 }
             }
         })

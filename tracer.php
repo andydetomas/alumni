@@ -26,12 +26,6 @@ if (isset($_SESSION['bio']['course_id'])) {
         max-height: 10vh;
         max-width: 6vw;
     }
-
-    .form-group .required:after {
-        content: " *";
-        color: red;
-        font-weight: 100;
-    }
 </style>
 <header class="masthead">
     <div class="container-fluid h-100">

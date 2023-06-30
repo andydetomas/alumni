@@ -42,6 +42,7 @@
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
         min-height: 50vh;
+        max-height: 50vh;
         cursor: pointer;
     }
 
@@ -78,7 +79,7 @@
         unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
         $desc = strtr(html_entity_decode($row['description']), $trans);
         $desc = str_replace(["<li>", "</li>"], ["", ","], $desc);
-        $commits = $conn->query("SELECT SUM(quantity) as quantity FROM product_commits pc where pc.product_id=1 and pc.status='RESERVED';");
+        $commits = $conn->query("SELECT SUM(quantity) as quantity FROM product_commits pc where pc.product_id=".$row['id']." and pc.status='RESERVED'");
         $row_commits = $commits->fetch_assoc();
         $available_quantity = $row['quantity']-$row_commits['quantity'];
         ?>
@@ -114,6 +115,7 @@
                     </div>
                     <?php endIf; ?>
                 </div>
+        </div>
         </div>
         <br>
     <?php endwhile; ?>

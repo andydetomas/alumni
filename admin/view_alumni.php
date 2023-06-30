@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
             <div class="col-md-6">
                 <p>Gender: <b><?php echo $gender ?></b></p>
                 <p>Account Status:
-                    <b><?php echo $status == 1 ? '<span class="badge badge-primary">Verified</span>' : '<span class="badge badge-secondary">Unverified</span>' ?></b>
+                    <b><?php echo $status == 'ACTIVE' ? '<span class="badge badge-primary">Verified</span>' : '<span class="badge badge-secondary">Unverified</span>' ?></b>
                 </p>
             </div>
         </div>
@@ -68,12 +68,12 @@ if (isset($_GET['id'])) {
     <div class="row">
         <div class="col-lg-12">
             <button class="btn float-right btn-secondary" type="button" data-dismiss="modal">Close</button>
-            <?php if ($status == 1): ?>
-                <button class="btn float-right btn-primary update mr-2" data-status='0' type="button"
+            <?php if ($status == 'ACTIVE'): ?>
+                <button class="btn float-right btn-primary update mr-2" data-status="INACTIVE" type="button"
                         data-dismiss="modal">Unverify Account
                 </button>
             <?php else: ?>
-                <button class="btn float-right btn-primary update mr-2" data-status='1' type="button"
+                <button class="btn float-right btn-primary update mr-2" data-status="ACTIVE" type="button"
                         data-dismiss="modal">Verify Account
                 </button>
             <?php endif; ?>
@@ -88,6 +88,7 @@ if (isset($_GET['id'])) {
             method: "POST",
             data: {id:<?php echo $id ?>, status: $(this).attr('data-status')},
             success: function (resp) {
+                console.log(resp);
                 if (resp == 1) {
                     alert_toast("Alumnus/Alumna account status successfully updated.")
                     setTimeout(function () {

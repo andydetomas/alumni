@@ -67,6 +67,12 @@ if(!$conn) {
         max-width: calc(100%);
     }
 
+    .form-group .required:after {
+        content: " *";
+        color: red;
+        font-weight: 100;
+    }
+
 </style>
 
 <body>

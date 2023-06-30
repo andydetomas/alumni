@@ -70,6 +70,12 @@ if ($action == "delete_course") {
         echo $delete;
     }
 }
+if ($action == "delete_alumni") {
+    $save = $crud->delete_alumni();
+    if ($save) {
+        echo $save;
+    }
+}
 if ($action == "update_alumni_acc") {
     $save = $crud->update_alumni_acc();
     if ($save) {

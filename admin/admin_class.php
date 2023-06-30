@@ -283,10 +283,19 @@ Class Action
         }
     }
 
+    function delete_alumni()
+    {
+        extract($_POST);
+        $delete = $this->db->query("UPDATE alumni_bio set status = 'INACTIVE' where id = ".$id);
+        if ($delete) {
+            return 1;
+        }
+    }
+
     function update_alumni_acc()
     {
         extract($_POST);
-        $update = $this->db->query("UPDATE alumnus_bio set status = $status where id = $id");
+        $update = $this->db->query("UPDATE alumnus_bio set status = '$status' where id = $id");
         if ($update) {
             return 1;
         }
@@ -295,50 +304,17 @@ Class Action
     function save_gallery()
     {
         extract($_POST);
-        $img = [];
-        $fpath = 'assets/uploads/gallery';
-        $files = is_dir($fpath) ? scandir($fpath) : [];
-        foreach ($files as $val) {
-            if (! in_array($val, ['.', '..'])) {
-                $n = explode('_', $val);
-                $img[$n[0]] = $val;
-            }
+        $data = "about = '$about' ";
+        if ($_FILES['path']['tmp_name'] != '') {
+            $_FILES['path']['name'] = str_replace(["(", ")", " "], '', $_FILES['path']['name']);
+            $fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['path']['name'];
+            $move = move_uploaded_file($_FILES['path']['tmp_name'], 'assets/uploads/gallery/'.$fname);
+            $data .= ", path = '$fname' ";
         }
         if (empty($id)) {
-            $save = $this->db->query("INSERT INTO gallery set about = '$about' ");
-            if ($save) {
-                $id = $this->db->insert_id;
-                $folder = "assets/uploads/gallery/";
-                $file = explode('.', $_FILES['img']['name']);
-                $file = end($file);
-                if (is_file($folder.$id.'/_img'.'.'.$file)) {
-                    unlink($folder.$id.'/_img'.'.'.$file);
-                }
-                if (isset($img[$id])) {
-                    unlink($folder.$img[$id]);
-                }
-                if ($_FILES['img']['tmp_name'] != '') {
-                    $fname = $id.'_img'.'.'.$file;
-                    $move = move_uploaded_file($_FILES['img']['tmp_name'], 'assets/uploads/gallery/'.$fname);
-                }
-            }
+            $save = $this->db->query("INSERT INTO gallery set ".$data);
         } else {
-            $save = $this->db->query("UPDATE gallery set about = '$about' where id=".$id);
-            if ($save) {
-                if ($_FILES['img']['tmp_name'] != '') {
-                    $folder = "assets/uploads/gallery/";
-                    $file = explode('.', $_FILES['img']['name']);
-                    $file = end($file);
-                    if (is_file($folder.$id.'/_img'.'.'.$file)) {
-                        unlink($folder.$id.'/_img'.'.'.$file);
-                    }
-                    if (isset($img[$id])) {
-                        unlink($folder.$img[$id]);
-                    }
-                    $fname = $id.'_img'.'.'.$file;
-                    $move = move_uploaded_file($_FILES['img']['tmp_name'], 'assets/uploads/gallery/'.$fname);
-                }
-            }
+            $save = $this->db->query("UPDATE gallery set ".$data." where id=".$id);
         }
         if ($save) {
             return 1;
@@ -438,7 +414,8 @@ Class Action
     function save_event()
     {
         extract($_POST);
-        $data = " title = '$title' ";
+        $data = " user_id = '{$_SESSION['login_id']}' ";
+        $data .= ", title = '$title' ";
         $data .= ", schedule = '$schedule' ";
         $data .= ", content = '".htmlentities(str_replace("'", "&#x2019;", $content))."' ";
         if ($_FILES['banner']['tmp_name'] != '') {
@@ -448,7 +425,6 @@ Class Action
             $data .= ", banner = '$fname' ";
         }
         if (empty($id)) {
-
             $save = $this->db->query("INSERT INTO events set ".$data);
         } else {
             $save = $this->db->query("UPDATE events set ".$data." where id=".$id);
@@ -504,20 +480,22 @@ Class Action
     function save_market()
     {
         extract($_POST);
-        $data = " title = '$title' ";
-        $data .= ", schedule = '$schedule' ";
-        $data .= ", content = '".htmlentities(str_replace("'", "&#x2019;", $content))."' ";
-        if ($_FILES['banner']['tmp_name'] != '') {
-            $_FILES['banner']['name'] = str_replace(["(", ")", " "], '', $_FILES['banner']['name']);
-            $fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['banner']['name'];
-            $move = move_uploaded_file($_FILES['banner']['tmp_name'], 'assets/uploads/'.$fname);
-            $data .= ", banner = '$fname' ";
+        $data = "user_id = '{$_SESSION['login_id']}' ";
+        $data .= ", name = '$name' ";
+        $data .= ", price = '$price' ";
+        $data .= ", quantity = '$quantity' ";
+        $data .= ", valid_until = '$valid_until' ";
+        $data .= ", description = '".htmlentities(str_replace("'", "&#x2019;", $description))."' ";
+        if ($_FILES['photo']['tmp_name'] != '') {
+            $_FILES['photo']['name'] = str_replace(["(", ")", " "], '', $_FILES['photo']['name']);
+            $fname = strtotime(date('y-m-d H:i')).'_'.$_FILES['photo']['name'];
+            $move = move_uploaded_file($_FILES['photo']['tmp_name'], 'assets/uploads/'.$fname);
+            $data .= ", photo = '$fname' ";
         }
         if (empty($id)) {
-
-            $save = $this->db->query("INSERT INTO market set ".$data);
+            $save = $this->db->query("INSERT INTO product set ".$data);
         } else {
-            $save = $this->db->query("UPDATE market set ".$data." where id=".$id);
+            $save = $this->db->query("UPDATE product set ".$data." where id=".$id);
         }
         if ($save) {
             return 1;
@@ -527,7 +505,7 @@ Class Action
     function delete_market()
     {
         extract($_POST);
-        $delete = $this->db->query("DELETE FROM market where id = ".$id) ;
+        $delete = $this->db->query("DELETE FROM product where id = ".$id) ;
         if ($delete) {
             return 1;
         }

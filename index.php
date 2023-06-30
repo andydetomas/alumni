@@ -100,6 +100,12 @@
         font-size: 50%;
     }
 
+    .form-group .required:after {
+        content: " *";
+        color: red;
+        font-weight: 100;
+    }
+
 </style>
 
 <body id="page-top">

@@ -18,7 +18,7 @@
                         <b>List of Events</b>
                         <span class="float:right"><a class="btn btn-primary btn-block btn-sm col-sm-2 float-right"
                                                      href="index.php?page=manage_event" id="new_event">
-					<i class="fa fa-plus"></i> New Entry
+					<i class="fa fa-plus"></i> New Event
 				</a></span>
                     </div>
                     <div class="card-body">
@@ -37,7 +37,7 @@
                                 <th class="">Schedule</th>
                                 <th class="">Title</th>
                                 <th class="">Description</th>
-                                <th class="">Commited To Participate</th>
+                                <th class="">Pledge to Participate</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -63,8 +63,10 @@
                                     <td>
                                         <p class="truncate"><?php echo strip_tags($desc) ?></p>
                                     </td>
-                                    <td>
-                                        <p class="text-right"><?php echo $commits ?></p>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-primary view_participant" type="button"
+                                                data-id="<?php echo $row['id'] ?>">View List
+                                        </button>
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-outline-primary view_event" type="button"
@@ -112,6 +114,9 @@
     $('.view_event').click(function () {
         window.open("../index.php?page=view_event&id=" + $(this).attr('data-id'))
 
+    })
+    $('.view_participant').click(function () {
+        uni_modal("View Participants", "view_participant.php?id=" + $(this).attr('data-id'), 'large')
     })
     $('.edit_event').click(function () {
         location.href = "index.php?page=manage_event&id=" + $(this).attr('data-id')

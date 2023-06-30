@@ -149,14 +149,14 @@ if (isset($_GET['id'])) {
                     <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
                     <div class="form-group row">
                         <div class="col-md-5">
-                            <label for="" class="control-label">Event</label>
+                            <label for="" class="control-label required">Event</label>
                             <input type="text" class="form-control" name="title"
                                    value="<?php echo isset($title) ? $title : '' ?>" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-5">
-                            <label for="" class="control-label">Schedule</label>
+                            <label for="" class="control-label required">Schedule</label>
                             <input type="text" class="form-control datetimepicker" name="schedule"
                                    value="<?php echo isset($schedule) ? date("Y-m-d H:i", strtotime($schedule)) : '' ?>"
                                    required autocomplete="off">
@@ -164,7 +164,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="form-group row">
                         <div class="col-md-10">
-                            <label for="" class="control-label">Description</label>
+                            <label for="" class="control-label required">Description</label>
                             <textarea name="content" id="content" class="form-control jqte" cols="30" rows="5"
                                       required><?php echo isset($content) ? html_entity_decode($content) : '' ?></textarea>
                         </div>
@@ -182,7 +182,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-sm btn-block btn-primary col-sm-2"> Save</button>
+                            <button class="btn btn-sm btn-block btn-primary col-sm-2">Save</button>
                         </div>
                     </div>
                 </form>
@@ -216,6 +216,7 @@ if (isset($_GET['id'])) {
             method: 'POST',
             type: 'POST',
             success: function (resp) {
+                console.log(resp);
                 if (resp == 1) {
                     alert_toast("Data successfully saved", 'success')
                     setTimeout(function () {

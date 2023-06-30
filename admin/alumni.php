@@ -16,20 +16,9 @@
                 <div class="card">
                     <div class="card-header">
                         <b>List of Alumni</b>
-                        <!-- <span class="float:right"><a class="btn btn-primary btn-block btn-sm col-sm-2 float-right" href="index.php?page=manage_alumni" id="new_alumni">
-                    <i class="fa fa-plus"></i> New Entry
-                </a></span> -->
                     </div>
                     <div class="card-body">
                         <table class="table table-condensed table-bordered table-hover">
-                            <!-- <colgroup>
-                                <col width="5%">
-                                <col width="10%">
-                                <col width="15%">
-                                <col width="15%">
-                                <col width="30%">
-                                <col width="15%">
-                            </colgroup> -->
                             <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -61,7 +50,7 @@
                                         <p><b><?php echo $row['course'] ?></b></p>
                                     </td>
                                     <td class="text-center">
-                                        <?php if ($row['status'] == 1): ?>
+                                        <?php if ($row['status'] == 'ACTIVE'): ?>
                                             <span class="badge badge-primary">Verified</span>
                                         <?php else: ?>
                                             <span class="badge badge-secondary">Not Verified</span>
@@ -72,9 +61,9 @@
                                         <button class="btn btn-sm btn-outline-primary view_alumni" type="button"
                                                 data-id="<?php echo $row['id'] ?>">View
                                         </button>
-                                        <button class="btn btn-sm btn-outline-danger delete_alumni" type="button"
-                                                data-id="<?php echo $row['id'] ?>">Delete
-                                        </button>
+<!--                                        <button class="btn btn-sm btn-outline-danger delete_alumni" type="button"-->
+<!--                                                data-id="--><?php //echo $row['id'] ?><!--">Deactivate-->
+<!--                                        </button>-->
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -141,11 +130,10 @@
             data: {id: $id},
             success: function (resp) {
                 if (resp == 1) {
-                    alert_toast("Data successfully deleted", 'success')
+                    alert_toast("User succesfully deactivated", 'success')
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
-
                 }
             }
         })

@@ -30,7 +30,7 @@
 
 							<button class="btn btn-primary btn-block btn-sm col-sm-2 float-right" type="button"
                                     id="new_career">
-					<i class="fa fa-plus"></i> New</button>
+					<i class="fa fa-plus"></i> New Job </button>
 				</span>
                     </div>
                     <div class="card-body">
@@ -48,7 +48,7 @@
                             <tbody>
                             <?php
                             $i = 1;
-                            $jobs = $conn->query("SELECT c.*,u.name from careers c inner join users u on u.id = c.user_id order by id desc");
+                            $jobs = $conn->query("SELECT c.*,u.first_name, u.last_name from careers c inner join users u on u.id = c.user_id order by id desc");
                             while ($row = $jobs->fetch_assoc()):
 
                                 ?>
@@ -64,7 +64,7 @@
 
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['name']) ?></b></p>
+                                        <p><b><?php echo ucwords($row['first_name'])." ".ucwords($row['last_name']) ?></b></p>
 
                                     </td>
                                     <td class="text-center">
@@ -110,7 +110,7 @@
         $('table').dataTable()
     })
     $('#new_career').click(function () {
-        uni_modal("New Entry", "manage_career.php", 'mid-large')
+        uni_modal("New Job Opportunity", "manage_career.php", 'mid-large')
     })
 
     $('.edit_career').click(function () {
@@ -137,7 +137,6 @@
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
-
                 }
             }
         })

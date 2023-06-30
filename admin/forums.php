@@ -30,7 +30,7 @@
 
 							<button class="btn btn-primary btn-block btn-sm col-sm-2 float-right" type="button"
                                     id="new_forum">
-					<i class="fa fa-plus"></i> New</button>
+					<i class="fa fa-plus"></i> New Thread</button>
 				</span>
                     </div>
                     <div class="card-body">
@@ -57,7 +57,7 @@
                             <tbody>
                             <?php
                             $i = 1;
-                            $Forum = $conn->query("SELECT f.*,u.name from forum_topics f inner join users u on u.id = f.user_id order by f.id desc");
+                            $Forum = $conn->query("SELECT f.*,u.first_name, u.last_name from forum_topics f inner join users u on u.id = f.user_id order by f.id desc");
                             while ($row = $Forum->fetch_assoc()):
                                 $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -78,7 +78,7 @@
 
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['name']) ?></b></p>
+                                        <p><b><?php echo ucwords($row['first_name'])." ".ucwords($row['last_name']) ?></b></p>
 
                                     </td>
                                     <td class="text-right">
@@ -128,7 +128,7 @@
         $('table').dataTable()
     })
     $('#new_forum').click(function () {
-        uni_modal("New Entry", "manage_forum.php", 'mid-large')
+        uni_modal("New Thread", "manage_forum.php", 'mid-large')
     })
 
     $('.edit_forum').click(function () {

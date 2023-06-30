@@ -18,7 +18,7 @@
                         <b>List of Merchandise</b>
                         <span class="float:right"><a class="btn btn-primary btn-block btn-sm col-sm-2 float-right"
                                                      href="index.php?page=manage_market" id="new_event">
-					<i class="fa fa-plus"></i> New Entry
+					<i class="fa fa-plus"></i> New Merch
 				</a></span>
                     </div>
                     <div class="card-body">
@@ -26,45 +26,54 @@
                             <colgroup>
                                 <col width="5%">
                                 <col width="20%">
+                                <col width="20%">
                                 <col width="15%">
-                                <col width="30%">
                                 <col width="15%">
+                                <col width="10%">
                                 <col width="15%">
                             </colgroup>
                             <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="">Release date</th>
-                                <th class="">Item</th>
-                                <th class="">Description</th>
-                                <th class="">Commited To Participate</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center"><p>#</p></th>
+                                <th class=""><p>Item</p></th>
+                                <th class=""><p>Description</p></th>
+                                <th class=""><p>Available Quantity</p></th>
+                                <th class=""><p>Available Until</p></th>
+                                <th class=""><p>Orders</p></th>
+                                <th class="text-center"><p>Action</p></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
                             $i = 1;
-                            $events = $conn->query("SELECT * FROM market order by unix_timestamp(schedule) desc ");
+                            $events = $conn->query("SELECT * FROM product where valid_until >= CURDATE()");
                             while ($row = $events->fetch_assoc()):
                                 $trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
                                 unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                                $desc = strtr(html_entity_decode($row['content']), $trans);
+                                $desc = strtr(html_entity_decode($row['description']), $trans);
                                 $desc = str_replace(["<li>", "</li>"], ["", ","], $desc);
-                                $commits = $conn->query("SELECT * FROM market_commits where market_id =".$row['id'])->num_rows;
+                                $commits = $conn->query("SELECT SUM(quantity) as quantity FROM product_commits pc where pc.product_id=".$row['id']." and pc.status='RESERVED'");
+                                $row_commits = $commits->fetch_assoc();
+                                $available_quantity = $row['quantity']-$row_commits['quantity'];
                                 ?>
                                 <tr>
                                     <td class="text-center"><?php echo $i++ ?></td>
                                     <td class="">
-                                        <p><b><?php echo date("M d, Y h:i A", strtotime($row['schedule'])) ?></b></p>
-                                    </td>
-                                    <td class="">
-                                        <p><b><?php echo ucwords($row['title']) ?></b></p>
+                                        <p><b><?php echo ucwords($row['name']) ?></b></p>
                                     </td>
                                     <td>
                                         <p class="truncate"><?php echo strip_tags($desc) ?></p>
                                     </td>
                                     <td>
-                                        <p class="text-right"><?php echo $commits ?></p>
+                                        <p class="text-center"><?php echo $available_quantity ?></p>
+                                    </td>
+                                    <td class="">
+                                        <p><b><?php echo date("M d, Y h:i A", strtotime($row['valid_until'])) ?></b></p>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-primary view_order" type="button"
+                                                data-id="<?php echo $row['id'] ?>">View List
+                                        </button>
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-outline-primary view_market" type="button"
@@ -120,6 +129,9 @@
     $('.delete_market').click(function () {
         _conf("Are you sure to delete this Item?", "delete_market", [$(this).attr('data-id')])
     })
+    $('.view_order').click(function () {
+        uni_modal("View Orders", "view_order.php?id=" + $(this).attr('data-id'), 'large')
+    })
 
     function delete_market($id) {
         start_load()
@@ -133,7 +145,6 @@
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
-
                 }
             }
         })

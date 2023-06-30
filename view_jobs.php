@@ -15,12 +15,12 @@ if (isset($_GET['id'])) {
     <p>Job Title: <b>
             <large><?php echo ucwords($job_title) ?></large>
         </b></p>
-    <p>Location:<b>
+    <p class="mb-5">Location:<b>
             <large><?php echo $company ?></large>
         </b></p>
     <?php echo html_entity_decode($description) ?>
 </div>
-<div class="modal-footer display">
+<div class="modal-footer display mt-5">
     <div class="row">
         <div class="col-md-12">
             <button class="btn float-right btn-secondary" type="button" data-dismiss="modal">Close</button>

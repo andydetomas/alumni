@@ -49,13 +49,17 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <?php echo "Tracer Study" ?>
+                    <h5>Tracer Study Statistic Graphs</h5>
                     <hr>
-
-                    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-                    <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
-
-
+                    <div class="col-lg-12">
+                        <canvas id="myChart" style="width:100%;max-width:100%"></canvas>
+                    </div>
+                    <div class="col-lg-12">
+                        <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+                    </div>
+                    <div class="col-lg-12">
+                        <canvas id="courseChart" style="width:100%;max-width:700px"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,8 +74,7 @@
                 "wednesday", "thursday", "friday", "saturday"],
             datasets: [{
                 label: 'Last week',
-                backgroundColor: 'rgba(161, 198, 247, 1)',
-                borderColor: 'rgb(47, 128, 237)',
+                borderColor: 'rgb(75, 192, 192)',
                 data: [3000, 4000, 2000, 5000, 8000, 9000, 2000],
             }]
         },
@@ -87,18 +90,56 @@
     });
 </script>
 <script>
-    const ctx = document.getElementById("myChart2").getContext('2d');
-    const myChart = new Chart(ctx, {
+    const ctx1 = document.getElementById("myChart2").getContext('2d');
+    const myChart1 = new Chart(ctx1, {
         type: 'pie',
         data: {
-            labels: ["rice", "yam", "tomato", "potato",
-                "beans", "maize", "oil"],
+            labels: ["rice", "yam", "tomato"],
             datasets: [{
                 label: 'food Items',
-                backgroundColor: 'rgba(161, 198, 247, 1)',
-                borderColor: 'rgb(47, 128, 237)',
-                data: [30, 40, 20, 50, 80, 90, 20],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                data: [30, 40, 20],
             }]
         },
+    });
+</script>
+<script>
+    const courseChart = document.getElementById("courseChart").getContext('2d');
+    const data = {
+        labels: ["rice", "yam", "tomato", "potato",
+            "beans", "maize", "oil"],
+        datasets: [{
+            // axis: 'y',
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+        }]
+    };
+    const myChart2 = new Chart(courseChart, {
+        type: 'horizontalBar',
+        data
     });
 </script>

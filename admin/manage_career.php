@@ -13,30 +13,30 @@ if (isset($_GET['id'])) {
         <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" class="form-control">
         <div class="row form-group">
             <div class="col-md-8">
-                <label class="control-label">Company</label>
+                <label class="control-label required">Company</label>
                 <input type="text" name="company" class="form-control"
-                       value="<?php echo isset($company) ? $company : '' ?>">
+                       value="<?php echo isset($company) ? $company : '' ?>" required>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-8">
-                <label class="control-label">Job Title</label>
+                <label class="control-label required">Job Title</label>
                 <input type="text" name="title" class="form-control"
-                       value="<?php echo isset($job_title) ? $job_title : '' ?>">
+                       value="<?php echo isset($job_title) ? $job_title : '' ?>" required>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-8">
-                <label class="control-label">Location</label>
+                <label class="control-label required">Location</label>
                 <input type="text" name="location" class="form-control"
-                       value="<?php echo isset($location) ? $location : '' ?>">
+                       value="<?php echo isset($location) ? $location : '' ?>" required>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-12">
-                <label class="control-label">Description</label>
+                <label class="control-label required">Description</label>
                 <textarea name="description"
-                          class="text-jqte"><?php echo isset($description) ? $description : '' ?></textarea>
+                          class="text-jqte" required><?php echo isset($description) ? $description : '' ?></textarea>
             </div>
         </div>
     </form>

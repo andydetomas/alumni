@@ -556,4 +556,20 @@ Class Action
             return 1;
         }
     }
+
+    function new_survey(){
+        extract($_POST);
+        $save = $this->db->query("INSERT INTO tracer_version set version= '$version'");
+        if ($save) {
+            return 1;
+        }
+    }
+
+    function close_survey(){
+        extract($_POST);
+        $update = $this->db->query("UPDATE tracer_version set status='INACTIVE' where id=".$id);
+        if ($update) {
+            return 1;
+        }
+    }
 }

@@ -122,7 +122,7 @@ if (isset($_SESSION['bio']['course_id'])) {
                                     <select class="custom-select" name="cur_job_find" id="cur_job_find" required>
                                         <option>Less than 1 month</option>
                                         <option>1 month to 6 months</option>
-                                        <option>6 months to 12 months </option>
+                                        <option>6 months to 12 months</option>
                                         <option>More than 1 year</option>
                                     </select>
                                 </div>
@@ -164,11 +164,11 @@ if (isset($_SESSION['bio']['course_id'])) {
                             </div>
                             <div class="row form-group employed">
                                 <div class="col-md-4">
-                                    <label for="" class="control-label required">Year started</label>
+                                    <label for="" class="control-label required">Year Started</label>
                                     <input type="input" class="form-control datepickerY" name="cur_job_start" id="cur_job_start" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="control-label required">Year ended</label>
+                                    <label for="" class="control-label required">Year Ended <small><i>(Select current year if still employed)</i></small></label>
                                     <input type="input" class="form-control datepickerY" name="cur_job_end" id="cur_job_end" required>
                                 </div>
                                 <div class="col-md-4">
@@ -395,7 +395,8 @@ if (isset($_SESSION['bio']['course_id'])) {
     $('.datepickerY').datepicker({
         format: "yyyy",
         viewMode: "years",
-        minViewMode: "years"
+        minViewMode: "years",
+        endDate:new Date()
     });
     $('.select2').select2({
         placeholder: "Please Select Here",

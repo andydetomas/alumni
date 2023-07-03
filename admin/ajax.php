@@ -181,6 +181,18 @@ if ($action == "survey") {
         echo $save;
     }
 }
+if ($action == "new_survey") {
+    $save = $crud->new_survey();
+    if ($save) {
+        echo $save;
+    }
+}
+if ($action == "close_survey") {
+    $save = $crud->close_survey();
+    if ($save) {
+        echo $save;
+    }
+}
 if ($action == "get_venue_report") {
     $get = $crud->get_venue_report();
     if ($get) {

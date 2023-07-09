@@ -71,16 +71,16 @@
                                         <img src="<?php echo isset($row['path']) ? $fpath.'/'.$row['path'] : '' ?>" alt="" class="gimg">
                                     </td>
                                     <td class="">
-                                        <?php echo $row['about'] ?>
+                                        <p><?php echo $row['about'] ?></p>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-primary edit_gallery" type="button"
+                                        <button class="btn btn-sm btn-outline-primary edit_gallery" type="button"
                                                 data-id="<?php echo $row['id'] ?>"
                                                 data-about="<?php echo $row['about'] ?>"
                                                 data-src="<?php echo isset($row['path']) ? $fpath.'/'.$row['path'] : '' ?>">
                                             Edit
                                         </button>
-                                        <button class="btn btn-sm btn-danger delete_gallery" type="button" data-id="<?php echo $row['id'] ?>">Delete
+                                        <button class="btn btn-sm btn-outline-danger delete_gallery" type="button" data-id="<?php echo $row['id'] ?>">Delete
                                         </button>
                                     </td>
                                 </tr>
@@ -107,8 +107,8 @@
     }
 
     .gimg {
-        max-height: 15vh;
-        max-width: 10vw;
+        max-height: 80px;
+        max-width: 80px;
     }
 
 </style>

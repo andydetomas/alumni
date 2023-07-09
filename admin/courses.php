@@ -59,14 +59,14 @@
                                 <tr>
                                     <td class="text-center"><?php echo $i++ ?></td>
                                     <td class="">
-                                        <?php echo $row['course'] ?>
+                                        <p><?php echo $row['course'] ?></p>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-primary edit_course" type="button"
+                                        <button class="btn btn-sm btn-outline-primary edit_course" type="button"
                                                 data-id="<?php echo $row['id'] ?>"
                                                 data-course="<?php echo $row['course'] ?>">Edit
                                         </button>
-                                        <button class="btn btn-sm btn-danger delete_course" type="button"
+                                        <button class="btn btn-sm btn-outline-danger delete_course" type="button"
                                                 data-id="<?php echo $row['id'] ?>">Delete
                                         </button>
                                     </td>

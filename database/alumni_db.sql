@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2023 at 08:31 PM
+-- Generation Time: Jul 09, 2023 at 08:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,7 +39,6 @@ CREATE TABLE `alumnus_bio` (
   `email` varchar(250) NOT NULL,
   `connected_to` text NOT NULL,
   `avatar` text NOT NULL,
-  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
   `date_created` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -47,23 +46,23 @@ CREATE TABLE `alumnus_bio` (
 -- Dumping data for table `alumnus_bio`
 --
 
-INSERT INTO `alumnus_bio` (`id`, `user_id`, `firstname`, `middlename`, `lastname`, `gender`, `batch`, `course_id`, `email`, `connected_to`, `avatar`, `status`, `date_created`) VALUES
-(1, 2, 'Jonas', 'Greiser', 'Snow', 'Male', '2009', 1, 'snow@gmail.com', 'Google Inc', 'alumni.jpg', 'ACTIVE', '2020-10-15'),
-(2, 4, 'Willette', 'Letherbury', 'Danzey', 'Female', '2008', 10, 'danzey@gmail.com', 'Wikido', '1688142480_g1.jpg', 'ACTIVE', '2023-07-01'),
-(15, 80, 'Codee', 'Hatchell', 'Harradine', 'Male', '2004', 9, 'harradine@gmail.com', 'Jabberbean', '1688148060_g2.jpg', 'ACTIVE', '2023-07-01'),
-(16, 81, 'Shalna', 'Burdus', 'McGuinley', 'Female', '1994', 9, 'mcguinley@gmail.com', 'Livetube', '1688148120_g3.jpg', 'ACTIVE', '2023-07-01'),
-(17, 82, 'Korrie', 'Jadczak', 'Orpee', 'Female', '2006', 2, 'orpee@gmail.com', 'Twinte', '1688148180_g4.jpg', 'ACTIVE', '2023-07-01'),
-(18, 83, 'Ula', 'Niles', 'Coare', 'Female', '2001', 4, 'coare@gmail.com', 'Snaptags', '1688148240_g5.jpg', 'ACTIVE', '2023-07-01'),
-(19, 84, 'Merilyn', 'Meigh', 'Sanpere', 'Female', '1991', 2, 'sanpere@gmail.com', 'Babblestorm', '1688148300_g6.jpg', 'ACTIVE', '2023-07-01'),
-(20, 85, 'Eva', 'Lilly', 'Climson', 'Female', '2004', 1, 'climson@gmail.com', 'Wordware', '1688148360_g7.jpg', 'INACTIVE', '2023-07-01'),
-(21, 86, 'Cherin', 'Finnigan', 'Brosh', 'Female', '1992', 2, 'brosh@gmail.com', 'Zoovu', '1688148420_g8.jpg', 'ACTIVE', '2023-07-01'),
-(22, 87, 'Ash', 'Vicson', 'Garmans', 'Male', '2005', 1, 'garmans@gmail.com', 'Mymm', '1688148540_b1.jpg', 'ACTIVE', '2023-07-01'),
-(23, 88, 'Kurtis', 'Giabucci', 'Coundley', 'Male', '2008', 2, 'coundley@gmail.com', 'Facebook', '1688148600_b2.jpg', 'ACTIVE', '2023-07-01'),
-(24, 89, 'Denis', 'Hernik', 'Headingham', 'Male', '1999', 9, 'headingham@gmail.com', 'Gigazoom', '1688148600_b3.jpg', 'ACTIVE', '2023-07-01'),
-(25, 90, 'Garrett', 'Rummery', 'Fields', 'Male', '1999', 5, 'garrett@gmail.com', 'Oloo', '1688148720_b4.jpg', 'INACTIVE', '2023-07-01'),
-(26, 91, 'Matty', 'Lowater', 'Clouston', 'Male', '2001', 3, 'clouston@gmail.com', 'Makati Medical Center', '1688148780_b5.jpg', 'ACTIVE', '2023-07-01'),
-(27, 92, 'Adrian', 'Presho', 'Lemery', 'Male', '2001', 1, 'lemery@gmail.com', 'UP Diliman', '1688148840_b6.jpg', 'ACTIVE', '2023-07-01'),
-(28, 93, 'Tally', 'Cancelier', 'Chadd', 'Male', '2005', 10, 'chadd@gmail.com', 'Quinu', '1688148900_b9.jpg', 'ACTIVE', '2023-07-01');
+INSERT INTO `alumnus_bio` (`id`, `user_id`, `firstname`, `middlename`, `lastname`, `gender`, `batch`, `course_id`, `email`, `connected_to`, `avatar`, `date_created`) VALUES
+(1, 2, 'Jonas', 'Greiser', 'Snow', 'Male', '2009', 1, 'snow@gmail.com', 'Google Inc', 'alumni.jpg', '2020-10-15'),
+(2, 4, 'Willette', 'Letherbury', 'Danzey', 'Female', '2008', 10, 'danzey@gmail.com', 'Wikido', '1688142480_g1.jpg', '2023-07-01'),
+(15, 80, 'Codee', 'Hatchell', 'Harradine', 'Male', '2004', 9, 'harradine@gmail.com', 'Jabberbean', '1688148060_g2.jpg', '2023-07-01'),
+(16, 81, 'Shalna', 'Burdus', 'McGuinley', 'Female', '1994', 9, 'mcguinley@gmail.com', 'Livetube', '1688148120_g3.jpg', '2023-07-01'),
+(17, 82, 'Korrie', 'Jadczak', 'Orpee', 'Female', '2006', 2, 'orpee@gmail.com', 'Twinte', '1688148180_g4.jpg', '2023-07-01'),
+(18, 83, 'Ula', 'Niles', 'Coare', 'Female', '2001', 4, 'coare@gmail.com', 'Snaptags', '1688148240_g5.jpg', '2023-07-01'),
+(19, 84, 'Merilyn', 'Meigh', 'Sanpere', 'Female', '1991', 2, 'sanpere@gmail.com', 'Babblestorm', '1688148300_g6.jpg', '2023-07-01'),
+(20, 85, 'Eva', 'Lilly', 'Climson', 'Female', '2004', 1, 'climson@gmail.com', 'Wordware', '1688148360_g7.jpg', '2023-07-01'),
+(21, 86, 'Cherin', 'Finnigan', 'Brosh', 'Female', '2017', 2, 'brosh@gmail.com', 'Zoovu', '1688148420_g8.jpg', '2023-07-01'),
+(22, 87, 'Ash', 'Vicson', 'Garmans', 'Male', '2005', 1, 'garmans@gmail.com', 'Mymm', '1688148540_b1.jpg', '2023-07-01'),
+(23, 88, 'Kurtis', 'Giabucci', 'Coundley', 'Male', '2008', 2, 'coundley@gmail.com', 'Facebook', '1688148600_b2.jpg', '2023-07-01'),
+(24, 89, 'Denis', 'Hernik', 'Headingham', 'Male', '1999', 9, 'headingham@gmail.com', 'Gigazoom', '1688148600_b3.jpg', '2023-07-01'),
+(25, 90, 'Garrett', 'Rummery', 'Fields', 'Male', '1999', 5, 'garrett@gmail.com', 'Oloo', '1688148720_b4.jpg', '2023-07-01'),
+(26, 91, 'Matty', 'Lowater', 'Clouston', 'Male', '2001', 3, 'clouston@gmail.com', 'Makati Medical Center', '1688148780_b5.jpg', '2023-07-01'),
+(27, 92, 'Adrian', 'Presho', 'Lemery', 'Male', '2001', 1, 'lemery@gmail.com', 'UP Diliman', '1688148840_b6.jpg', '2023-07-01'),
+(28, 93, 'Tally', 'Cancelier', 'Chadd', 'Male', '2005', 10, 'chadd@gmail.com', 'Quinu', '1688148900_b9.jpg', '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -340,7 +339,9 @@ CREATE TABLE `product_commits` (
 
 INSERT INTO `product_commits` (`id`, `product_id`, `user_id`, `quantity`, `status`) VALUES
 (47, 1, 86, 3, 'RESERVED'),
-(48, 1, 88, 4, 'RESERVED');
+(48, 1, 88, 4, 'RESERVED'),
+(49, 7, 2, 2, 'RESERVED'),
+(50, 7, 2, 1, 'RESERVED');
 
 -- --------------------------------------------------------
 
@@ -380,7 +381,7 @@ CREATE TABLE `tracer_survey` (
   `cur_unemployed_reason` text NOT NULL,
   `cur_job` int(30) DEFAULT NULL,
   `cur_job_other` text NOT NULL,
-  `cur_job_company` int(11) NOT NULL,
+  `cur_job_company` text NOT NULL,
   `cur_job_find` text NOT NULL,
   `cur_job_status` int(30) DEFAULT NULL,
   `cur_job_salary` text NOT NULL,
@@ -393,6 +394,21 @@ CREATE TABLE `tracer_survey` (
   `date_created` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tracer_survey`
+--
+
+INSERT INTO `tracer_survey` (`id`, `user_id`, `first_job`, `first_job_other`, `first_job_status`, `cur_employed`, `cur_unemployed_reason`, `cur_job`, `cur_job_other`, `cur_job_company`, `cur_job_find`, `cur_job_status`, `cur_job_salary`, `cur_job_start`, `cur_job_end`, `grad_course`, `grad_course_status`, `award_job`, `tracer_version`, `date_created`) VALUES
+(19, 2, 5, '', 1, 'EMPLOYED', '', 5, '', 'Ateneo de Manila University', '1 month to 6 months', 1, 'Between ₱63,700 to ₱109,200', '2021', '2022', '', '', '', 1, '2023-07-01 14:16:09'),
+(20, 4, 5, '', 1, 'EMPLOYED', '', 1, 'Lawyer', 'Zamboanga Law Office', '1 month to 6 months', 9, 'Between ₱36,400 to ₱63,700', '2022', '2022', '', '', '', 1, '2023-07-01 14:25:02'),
+(21, 80, 2, '', 1, 'EMPLOYED', '', 2, '', 'GFP Architects', '6 months to 12 months', 1, 'Less than ₱9,100', '2005', '2022', '', '', '', 1, '2023-07-01 14:27:12'),
+(22, 83, 3, '', 12, 'EMPLOYED', '', 3, '', 'DPWH', 'Less than 1 month', 3, 'Between ₱63,700 to ₱109,200', '2020', '2022', '', '', '', 1, '2023-07-01 14:29:46'),
+(23, 84, 6, '', 1, 'EMPLOYED', '', 6, '', 'Oracle PH', 'Less than 1 month', 1, 'At least ₱182,000 and up', '2017', '2022', '', '', '', 1, '2023-07-01 14:31:05'),
+(24, 86, 6, '', 1, 'EMPLOYED', '', 6, '', 'Canva PH', '1 month to 6 months', 1, 'Between ₱109,200 to ₱182,000', '2018', '2022', 'Master in Information technology', 'On-going', '', 1, '2023-07-01 14:33:57'),
+(25, 87, 5, '', 1, 'UNEMPLOYED', 'Further study', NULL, '', '', '', NULL, '', '0000', '0000', 'Masteral in Secondary Education', 'On-going', '', 1, '2023-07-01 14:35:21'),
+(26, 88, 6, '', 2, 'EMPLOYED', '', 6, '', 'Microsoft Inc', 'Less than 1 month', 1, 'At least ₱182,000 and up', '2018', '2022', '', '', '', 1, '2023-07-01 14:36:37'),
+(27, 89, NULL, '', 3, 'UNEMPLOYED', 'No job opportunity', NULL, '', '', '', NULL, '', '0000', '0000', '', '', '', 1, '2023-07-01 14:37:31');
+
 -- --------------------------------------------------------
 
 --
@@ -401,9 +417,16 @@ CREATE TABLE `tracer_survey` (
 
 CREATE TABLE `tracer_version` (
   `id` int(30) NOT NULL,
-  `version` varchar(255) NOT NULL,
+  `version` year(4) NOT NULL,
   `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'ACTIVE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tracer_version`
+--
+
+INSERT INTO `tracer_version` (`id`, `version`, `status`) VALUES
+(1, '2022', 'INACTIVE');
 
 -- --------------------------------------------------------
 
@@ -418,33 +441,34 @@ CREATE TABLE `users` (
   `last_name` varchar(200) NOT NULL,
   `username` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `type` enum('ADMIN','OFFICER','ALUMNI','') NOT NULL DEFAULT 'ALUMNI'
+  `type` enum('ADMIN','OFFICER','ALUMNI','') NOT NULL DEFAULT 'ALUMNI',
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'ACTIVE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `username`, `password`, `type`) VALUES
-(1, 'Admin', '', '', 'admin', '0192023a7bbd73250516f069df18b500', 'ADMIN'),
-(2, 'Jonas', 'Greiser', 'Snow', 'jonas@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(3, 'Amy', 'Smith', 'Taylor', 'amy@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'OFFICER'),
-(4, 'Willette', 'Letherbury', 'Danzey', 'danzey@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(5, 'Rose', 'Cruz', 'Sebastian', 'rose@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'OFFICER'),
-(80, 'Codee', 'Hatchell', 'Harradine', 'harradine@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(81, 'Shalna', 'Burdus', 'McGuinley', 'mcguinley@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(82, 'Korrie', 'Jadczak', 'Orpee', 'orpee@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(83, 'Ula', 'Niles', 'Coare', 'coare@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(84, 'Merilyn', 'Meigh', 'Sanpere', 'sanpere@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(85, 'Eva', 'Lilly', 'Climson', 'climson@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(86, 'Cherin', 'Finnigan', 'Brosh', 'brosh@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(87, 'Ash', 'Vicson', 'Garmans', 'garmans@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(88, 'Kurtis', 'Giabucci', 'Coundley', 'coundley@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(89, 'Denis', 'Hernik', 'Headingham', 'headingham@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(90, 'Garrett', 'Rummery', 'Fields', 'garrett@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(91, 'Matty', 'Lowater', 'Clouston', 'clouston@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(92, 'Adrian', 'Presho', 'Lemery', 'lemery@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI'),
-(93, 'Tally', 'Cancelier', 'Chadd', 'chadd@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI');
+INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `username`, `password`, `type`, `status`) VALUES
+(1, 'Admin', '', '', 'admin', '0192023a7bbd73250516f069df18b500', 'ADMIN', 'ACTIVE'),
+(2, 'Jonas', 'Greiser', 'Snow', 'jonas@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(3, 'Amy', 'Smith', 'Taylor', 'amy@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'OFFICER', 'ACTIVE'),
+(4, 'Willette', 'Letherbury', 'Danzey', 'danzey@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(5, 'Rose', 'Cruz', 'Sebastian', 'rose@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'OFFICER', 'ACTIVE'),
+(80, 'Codee', 'Hatchell', 'Harradine', 'harradine@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(81, 'Shalna', 'Burdus', 'McGuinley', 'mcguinley@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(82, 'Korrie', 'Jadczak', 'Orpee', 'orpee@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(83, 'Ula', 'Niles', 'Coare', 'coare@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(84, 'Merilyn', 'Meigh', 'Sanpere', 'sanpere@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(85, 'Eva', 'Lilly', 'Climson', 'climson@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(86, 'Cherin', 'Finnigan', 'Brosh', 'brosh@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(87, 'Ash', 'Vicson', 'Garmans', 'garmans@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'INACTIVE'),
+(88, 'Kurtis', 'Giabucci', 'Coundley', 'coundley@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(89, 'Denis', 'Hernik', 'Headingham', 'headingham@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(90, 'Garrett', 'Rummery', 'Fields', 'garrett@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(91, 'Matty', 'Lowater', 'Clouston', 'clouston@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'INACTIVE'),
+(92, 'Adrian', 'Presho', 'Lemery', 'lemery@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE'),
+(93, 'Tally', 'Cancelier', 'Chadd', 'chadd@gmail.com', '5e8ff9bf55ba3508199d22e984129be6', 'ALUMNI', 'ACTIVE');
 
 --
 -- Indexes for dumped tables
@@ -638,7 +662,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_commits`
 --
 ALTER TABLE `product_commits`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -650,19 +674,19 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `tracer_survey`
 --
 ALTER TABLE `tracer_survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tracer_version`
 --
 ALTER TABLE `tracer_version`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- Constraints for dumped tables

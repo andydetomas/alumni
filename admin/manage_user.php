@@ -12,11 +12,21 @@ if (isset($_GET['id'])) {
     <div id="msg"></div>
 
     <form action="" id="manage-user">
-        <input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id'] : '' ?>">
+        <input type="hidden" name="id" value="<?php echo isset($meta['id']) && $meta['id'] != null ? $meta['id'] : '' ?>">
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control"
-                   value="<?php echo isset($meta['name']) ? $meta['name'] : '' ?>" required>
+            <label for="name">First Name</label>
+            <input type="text" name="first_name" id="first_name" class="form-control"
+                   value="<?php echo isset($meta['first_name']) ? $meta['first_name'] : '' ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Middle Name</label>
+            <input type="text" name="middle_name" id="middle_name" class="form-control"
+                   value="<?php echo isset($meta['middle_name']) ? $meta['middle_name'] : '' ?>">
+        </div>
+        <div class="form-group">
+            <label for="name">Last Name</label>
+            <input type="text" name="last_name" id="last_name" class="form-control"
+                   value="<?php echo isset($meta['last_name']) ? $meta['last_name'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="username">Username</label>
@@ -37,10 +47,10 @@ if (isset($_GET['id'])) {
                 <div class="form-group">
                     <label for="type">User Type</label>
                     <select name="type" id="type" class="custom-select">
-                        <option value="2" <?php echo isset($meta['type']) && $meta['type'] == 2 ? 'selected' : '' ?>>
+                        <option value="OFFICER" <?php echo isset($meta['type']) && $meta['type'] == 'OFFICER' ? 'selected' : '' ?>>
                             Staff
                         </option>
-                        <option value="1" <?php echo isset($meta['type']) && $meta['type'] == 1 ? 'selected' : '' ?>>
+                        <option value="ADMIN" <?php echo isset($meta['type']) && $meta['type'] == 'ADMIN' ? 'selected' : '' ?>>
                             Admin
                         </option>
                     </select>
@@ -61,13 +71,17 @@ if (isset($_GET['id'])) {
             method: 'POST',
             data: $(this).serialize(),
             success: function (resp) {
+                console.log(resp);
                 if (resp == 1) {
                     alert_toast("Data successfully saved", 'success')
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
-                } else {
+                } else if (resp == 2) {
                     $('#msg').html('<div class="alert alert-danger">Username already exist</div>')
+                    end_load()
+                } else {
+                    $('#msg').html('<div class="alert alert-danger">You have encountered an error.</div>')
                     end_load()
                 }
             }

@@ -32,7 +32,7 @@
                             <tbody>
                             <?php
                             $i = 1;
-                            $alumni = $conn->query("SELECT a.*,c.course,Concat(a.lastname,', ',a.firstname,' ',a.middlename) as name from alumnus_bio a inner join courses c on c.id = a.course_id order by Concat(a.lastname,', ',a.firstname,' ',a.middlename) asc");
+                            $alumni = $conn->query("SELECT a.*,c.course,Concat(a.lastname,', ',a.firstname,' ',a.middlename) as name, u.status from alumnus_bio a inner join users u on u.id=a.user_id inner join courses c on c.id = a.course_id order by Concat(a.lastname,', ',a.firstname,' ',a.middlename) asc");
                             while ($row = $alumni->fetch_assoc()):
 
                                 ?>
@@ -44,10 +44,10 @@
                                         </div>
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['name']) ?></b></p>
+                                        <p><?php echo ucwords($row['name']) ?></p>
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo $row['course'] ?></b></p>
+                                        <p><?php echo $row['course'] ?></p>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($row['status'] == 'ACTIVE'): ?>
@@ -61,9 +61,6 @@
                                         <button class="btn btn-sm btn-outline-primary view_alumni" type="button"
                                                 data-id="<?php echo $row['id'] ?>">View
                                         </button>
-<!--                                        <button class="btn btn-sm btn-outline-danger delete_alumni" type="button"-->
-<!--                                                data-id="--><?php //echo $row['id'] ?><!--">Deactivate-->
-<!--                                        </button>-->
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -118,24 +115,4 @@
         uni_modal("Bio", "view_alumni.php?id=" + $(this).attr('data-id'), 'mid-large')
 
     })
-    $('.delete_alumni').click(function () {
-        _conf("Are you sure to delete this alumni?", "delete_alumni", [$(this).attr('data-id')])
-    })
-
-    function delete_alumni($id) {
-        start_load()
-        $.ajax({
-            url: 'ajax.php?action=delete_alumni',
-            method: 'POST',
-            data: {id: $id},
-            success: function (resp) {
-                if (resp == 1) {
-                    alert_toast("User succesfully deactivated", 'success')
-                    setTimeout(function () {
-                        location.reload()
-                    }, 1500)
-                }
-            }
-        })
-    }
 </script>

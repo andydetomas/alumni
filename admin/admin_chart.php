@@ -1,10 +1,11 @@
 <?php
 
-    function getLabelsByYears($years) {
+    function getLabelsByYears($pastYearsRange, $futureYearsRange) {
         $arr = array();
 
-        $startYear = date("Y") - $years;
-        for ($i = $startYear; $i <= date("Y"); $i++) {
+        $startYear = date("Y") - $pastYearsRange;
+        $endYear = date("Y") + $futureYearsRange;
+        for ($i = $startYear; $i <= $endYear; $i++) {
             array_push($arr, $i);
         }
 
@@ -24,7 +25,7 @@
     function getUnemployedData($conn, $listOfYears) {
         $arr = array();
         foreach ($listOfYears as $value) {
-            $row = $conn->query("SELECT COUNT(id) as unemployed FROM tracer_survey where cur_employed='UNEMPLOYED' and YEAR(date_created) = '$value'")->fetch_assoc();
+            $row = $conn->query("SELECT COUNT(s.id) as unemployed FROM tracer_survey s LEFT JOIN tracer_version t on s.tracer_version=t.id where s.cur_employed='UNEMPLOYED' and t.version = '$value'")->fetch_assoc();
             array_push($arr, isset($row['unemployed']) && $row['unemployed'] != null ? $row['unemployed'] : 0);
         }
 
@@ -70,9 +71,8 @@
         return $arr;
     }
 
-    function getEmployedStatusForCurYear($conn, $listOfStatus) {
+    function getEmployedStatusForCurYear($conn, $curYear, $listOfStatus) {
         $arr = array();
-        $curYear = date("Y") - 1;
         foreach ($listOfStatus as $value) {
             $row = $conn->query("SELECT COUNT(s.id) AS employed FROM tracer_survey s 
                                 LEFT JOIN job_classification cs ON s.cur_job_status = cs.id
@@ -83,9 +83,8 @@
         return $arr;
     }
 
-    function getEmployedLengthForCurYear($conn, $listOfLength) {
+    function getEmployedLengthForCurYear($conn, $curYear, $listOfLength) {
         $arr = array();
-        $curYear = date("Y") - 1;
         foreach ($listOfLength as $value) {
             $row = $conn->query("SELECT COUNT(s.id) AS employed FROM tracer_survey s WHERE cur_job_start <= '$curYear' AND cur_job_end >= '$curYear' AND cur_job_find LIKE '%$value%'")->fetch_assoc();
             array_push($arr, isset($row['employed']) && $row['employed'] != null ? $row['employed'] : 0);
@@ -94,9 +93,8 @@
         return $arr;
     }
 
-    function getEmployedSalaryForCurYear($conn, $listOfSalaryClass) {
+    function getEmployedSalaryForCurYear($conn, $curYear, $listOfSalaryClass) {
         $arr = array();
-        $curYear = date("Y") - 1;
         foreach ($listOfSalaryClass as $value) {
             $row = $conn->query("SELECT COUNT(s.id) AS employed FROM tracer_survey s WHERE cur_job_start <= '$curYear' AND cur_job_end >= '$curYear' AND cur_job_salary LIKE '%$value%'")->fetch_assoc();
             array_push($arr, isset($row['employed']) && $row['employed'] != null ? $row['employed'] : 0);
@@ -105,9 +103,8 @@
         return $arr;
     }
 
-    function getEmployedJobForCurYear($conn, $listOfJobs) {
+    function getEmployedJobForCurYear($conn, $curYear, $listOfJobs) {
         $arr = array();
-        $curYear = date("Y") - 1;
         foreach ($listOfJobs as $value) {
             $row = $conn->query("SELECT COUNT(s.id) AS employed FROM tracer_survey s 
                                     LEFT JOIN job_type jt ON s.cur_job = jt.id

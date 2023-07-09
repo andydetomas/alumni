@@ -56,15 +56,15 @@
 
                                     <td class="text-center"><?php echo $i++ ?></td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['company']) ?></b></p>
+                                        <p><?php echo ucwords($row['company']) ?></p>
 
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['job_title']) ?></b></p>
+                                        <p><?php echo ucwords($row['job_title']) ?></p>
 
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['first_name'])." ".ucwords($row['last_name']) ?></b></p>
+                                        <p><?php echo ucwords($row['first_name'])." ".ucwords($row['last_name']) ?></p>
 
                                     </td>
                                     <td class="text-center">

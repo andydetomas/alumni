@@ -1,7 +1,7 @@
 <?php include 'db_connect.php' ?>
 <?php
 if (isset($_GET['id'])) {
-    $qry = $conn->query("SELECT a.*,c.course,Concat(a.lastname,', ',a.firstname,' ',a.middlename) as name from alumnus_bio a inner join courses c on c.id = a.course_id where a.id= ".$_GET['id']);
+    $qry = $conn->query("SELECT a.*,c.course,Concat(a.lastname,', ',a.firstname,' ',a.middlename) as name , u.status from alumnus_bio a inner join users u on u.id=a.user_id inner join courses c on c.id = a.course_id where a.id= ".$_GET['id']);
     foreach ($qry->fetch_array() as $k => $val) {
         $$k = $val;
     }
@@ -86,7 +86,7 @@ if (isset($_GET['id'])) {
         $.ajax({
             url: 'ajax.php?action=update_alumni_acc',
             method: "POST",
-            data: {id:<?php echo $id ?>, status: $(this).attr('data-status')},
+            data: {id:<?php echo $user_id ?>, status: $(this).attr('data-status')},
             success: function (resp) {
                 console.log(resp);
                 if (resp == 1) {

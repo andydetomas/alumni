@@ -34,13 +34,13 @@
                             </colgroup>
                             <thead>
                             <tr>
-                                <th class="text-center"><p>#</p></th>
-                                <th class=""><p>Item</p></th>
-                                <th class=""><p>Description</p></th>
-                                <th class=""><p>Available Quantity</p></th>
-                                <th class=""><p>Available Until</p></th>
-                                <th class=""><p>Orders</p></th>
-                                <th class="text-center"><p>Action</p></th>
+                                <th class="text-center">#</th>
+                                <th class="">Item</th>
+                                <th class="">Description</th>
+                                <th class="">Available Quantity</th>
+                                <th class="">Available Until</th>
+                                <th class="">Orders</th>
+                                <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,7 +68,7 @@
                                         <p class="text-center"><?php echo $available_quantity ?></p>
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo date("M d, Y h:i A", strtotime($row['valid_until'])) ?></b></p>
+                                        <p><?php echo date("M d, Y h:i A", strtotime($row['valid_until'])) ?></p>
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-outline-primary view_order" type="button"

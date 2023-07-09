@@ -3,6 +3,7 @@
     include 'admin_chart.php';
 
     $qry = $conn->query("SELECT * FROM tracer_version where status = 'ACTIVE' LIMIT 1")->fetch_array();
+    $qry_all = $conn->query("SELECT * FROM tracer_version order by version asc LIMIT 1")->fetch_array();
 ?>
 <div class="container-fluid">
     <div class="row mt-3 ml-3 mr-3">
@@ -32,10 +33,20 @@
                         </div>
                     </div>
                     <div class="col-lg-12 row mt-5">
-                        <h6>Data for <?php echo date("Y"); ?></h6>
+                        <h6>Data for Year: </h6>
+                        <div class="form-group ml-2 mt-n2 mb-n2">
+                            <select name="chartYear" id="chartYear" class="custom-select">
+                                <?php
+                                $years = getLabelsByYears(4,1);
+                                $curYear = isset($_GET['year']) && $_GET['year'] != null ? $_GET['year'] : $qry_all['version'];
+                                for($i = count($years)-1;$i >= 0;$i--):?>
+                                    <option value="<?php echo $years[$i]?>" <?php echo $curYear == $years[$i] ? 'selected' : '' ?>><?php echo $years[$i]?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
                     </div>
                     <hr>
-                    <div class="col-lg-12 row mt-3">
+                    <div class="col-lg-12 row">
                         <div class="col-lg-6">
                             <canvas id="statusByCurYear" style="width:100%;max-width:700px"></canvas>
                         </div>
@@ -107,9 +118,15 @@
         </div>
     </div>
 </div>
+
 <script>
+    <?php if(!isset($_GET['year'])) $_GET['year']=$curYear ?>
     $(document).ready(function () {
-        $('table').dataTable()
+        updateChart();
+        $('table').dataTable();
+        $('#chartYear').change(function(){
+            location.href = "index.php?page=tracer&year=" + $("#chartYear option:selected").val();
+        });
     });
     $('#new_survey').click(function () {
         uni_modal("Open New Tracer Survey", "manage_tracer.php", 'mid-large')
@@ -137,25 +154,23 @@
             }
         })
     }
-</script>
 
-<!--CHARTS Configurations-->
-<script>
+    <!--CHARTS Configurations-->
     // -----------------------------FIRST CHART
     const employmentChart = document.getElementById("employmentChart").getContext("2d");
     const employmentChartData = {
-        labels: <?php echo json_encode(getLabelsByYears(4)) ?>,
+        labels: <?php echo json_encode(getLabelsByYears(4, 1)) ?>,
         datasets: [{
             label: "Employed",
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgb(54, 162, 235)',
-            data: <?php echo json_encode(getEmployedData($conn, getLabelsByYears(4))) ?>,
+            data: <?php echo json_encode(getEmployedData($conn, getLabelsByYears(4, 1))) ?>,
             borderWidth: 1
         }, {
             label: "Unemployed",
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgb(255, 99, 132)',
-            data: <?php echo json_encode(getUnemployedData($conn, getLabelsByYears(4))) ?>,
+            data: <?php echo json_encode(getUnemployedData($conn, getLabelsByYears(4, 1))) ?>,
             borderWidth: 1
         }]
     };
@@ -177,18 +192,18 @@
     // -----------------------SECOND CHART
     const employmentGradChart = document.getElementById("employmentGradChart").getContext("2d");
     const employmentGradChartData = {
-        labels: <?php echo json_encode(getLabelsByYears(4)) ?>,
+        labels: <?php echo json_encode(getLabelsByYears(4, 1)) ?>,
         datasets: [{
             label: "Employed Only",
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgb(54, 162, 235)',
-            data: <?php echo json_encode(getEmployedData($conn, getLabelsByYears(4))) ?>,
+            data: <?php echo json_encode(getEmployedData($conn, getLabelsByYears(4, 1))) ?>,
             borderWidth: 1
         }, {
             label: "Employed while Studying",
             backgroundColor: 'rgba(153, 102, 255, 0.2)',
             borderColor: 'rgb(153, 102, 255)',
-            data: <?php echo json_encode(getEmployedWhileStudying($conn, getLabelsByYears(4))) ?>,
+            data: <?php echo json_encode(getEmployedWhileStudying($conn, getLabelsByYears(4, 1))) ?>,
             borderWidth: 1
         }]
     };
@@ -207,141 +222,143 @@
         }
     });
 
-    // -----------------------THIRD CHART
-    const statusByCurYear = document.getElementById("statusByCurYear").getContext('2d');
-    new Chart(statusByCurYear, {
-        type: 'pie',
-        data: {
-            labels: <?php echo json_encode(getLabelsByStatus($conn)) ?>,
-            datasets: [{
-                label: 'food Items',
-                backgroundColor: [
-                    'rgb(0,0,0)',
-                    'rgb(135,81,44)',
-                    'rgb(203,182,159)',
-                    'rgb(158,1,66)',
-                    'rgb(213,62,79)',
-                    'rgb(244,109,67)',
-                    'rgb(253,174,97)',
-                    'rgb(254,224,139)',
-                    'rgb(230,245,152)',
-                    'rgb(171,221,164)',
-                    'rgb(102,194,165)',
-                    'rgb(50,136,189)',
-                    'rgb(94,79,162)',
-                ],
-                data: <?php echo json_encode(getEmployedStatusForCurYear($conn, getLabelsByStatus($conn))) ?>,
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: "right"
+    function updateChart() {
+        // -----------------------THIRD CHART
+        const statusByCurYear = document.getElementById("statusByCurYear").getContext('2d');
+        new Chart(statusByCurYear, {
+            type: 'pie',
+            data: {
+                labels: <?php echo json_encode(getLabelsByStatus($conn)) ?>,
+                datasets: [{
+                    label: 'food Items',
+                    backgroundColor: [
+                        'rgb(0,0,0)',
+                        'rgb(135,81,44)',
+                        'rgb(203,182,159)',
+                        'rgb(158,1,66)',
+                        'rgb(213,62,79)',
+                        'rgb(244,109,67)',
+                        'rgb(253,174,97)',
+                        'rgb(254,224,139)',
+                        'rgb(230,245,152)',
+                        'rgb(171,221,164)',
+                        'rgb(102,194,165)',
+                        'rgb(50,136,189)',
+                        'rgb(94,79,162)',
+                    ],
+                    data: <?php echo json_encode(getEmployedStatusForCurYear($conn, $_GET['year'], getLabelsByStatus($conn))) ?>,
+                }]
             },
-            title: {
-                display: true,
-                text: 'Alumni Employed per Status Classification'
+            options: {
+                responsive: true,
+                legend: {
+                    position: "right"
+                },
+                title: {
+                    display: true,
+                    text: 'Alumni Employed per Status Classification'
+                }
             }
-        }
-    });
+        });
 
-    // -----------------------FOURTH CHART
-    const lengthByCurYear = document.getElementById("lengthByCurYear").getContext('2d');
-    new Chart(lengthByCurYear, {
-        type: 'pie',
-        data: {
-            labels: <?php echo json_encode(getLabelsByLength()) ?>,
-            datasets: [{
-                label: 'food Items',
-                backgroundColor: [
-                    'rgb(213,62,79)',
-                    'rgb(254,224,139)',
-                    'rgb(102,194,165)',
-                    'rgb(50,136,189)',
-                ],
-                data: <?php echo json_encode(getEmployedLengthForCurYear($conn, getLabelsByLength())) ?>,
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: "right"
+        // -----------------------FOURTH CHART
+        const lengthByCurYear = document.getElementById("lengthByCurYear").getContext('2d');
+        new Chart(lengthByCurYear, {
+            type: 'pie',
+            data: {
+                labels: <?php echo json_encode(getLabelsByLength()) ?>,
+                datasets: [{
+                    label: 'food Items',
+                    backgroundColor: [
+                        'rgb(213,62,79)',
+                        'rgb(254,224,139)',
+                        'rgb(102,194,165)',
+                        'rgb(50,136,189)',
+                    ],
+                    data: <?php echo json_encode(getEmployedLengthForCurYear($conn, $_GET['year'], getLabelsByLength())) ?>,
+                }]
             },
-            title: {
-                display: true,
-                text: 'Time Taken to Find a Job'
+            options: {
+                responsive: true,
+                legend: {
+                    position: "right"
+                },
+                title: {
+                    display: true,
+                    text: 'Time Taken to Find a Job'
+                }
             }
-        }
-    });
+        });
 
-    // -----------------------FIFTH CHART
-    const salaryByCurYear = document.getElementById("salaryByCurYear").getContext('2d');
-    new Chart(salaryByCurYear, {
-        type: 'pie',
-        data: {
-            labels: <?php echo json_encode(getLabelsBySalary()) ?>,
-            datasets: [{
-                label: 'food Items',
-                backgroundColor: [
-                    'rgb(158,1,66)',
-                    'rgb(213,62,79)',
-                    'rgb(244,109,67)',
-                    'rgb(253,174,97)',
-                    'rgb(254,224,139)',
-                    'rgb(230,245,152)',
-                    'rgb(171,221,164)',
-                    'rgb(102,194,165)',
-                    'rgb(50,136,189)',
-                    'rgb(94,79,162)',
-                ],
-                data: <?php echo json_encode(getEmployedSalaryForCurYear($conn, getLabelsBySalary())) ?>,
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: "right"
+        // -----------------------FIFTH CHART
+        const salaryByCurYear = document.getElementById("salaryByCurYear").getContext('2d');
+        new Chart(salaryByCurYear, {
+            type: 'pie',
+            data: {
+                labels: <?php echo json_encode(getLabelsBySalary()) ?>,
+                datasets: [{
+                    label: 'food Items',
+                    backgroundColor: [
+                        'rgb(158,1,66)',
+                        'rgb(213,62,79)',
+                        'rgb(244,109,67)',
+                        'rgb(253,174,97)',
+                        'rgb(254,224,139)',
+                        'rgb(230,245,152)',
+                        'rgb(171,221,164)',
+                        'rgb(102,194,165)',
+                        'rgb(50,136,189)',
+                        'rgb(94,79,162)',
+                    ],
+                    data: <?php echo json_encode(getEmployedSalaryForCurYear($conn, $_GET['year'], getLabelsBySalary())) ?>,
+                }]
             },
-            title: {
-                display: true,
-                text: 'Alumni Employed per Salary Class'
+            options: {
+                responsive: true,
+                legend: {
+                    position: "right"
+                },
+                title: {
+                    display: true,
+                    text: 'Alumni Employed per Salary Class'
+                }
             }
-        }
-    });
+        });
 
-    // -----------------------SIXTH CHART
+        // -----------------------SIXTH CHART
 
-    const courseEmployed = document.getElementById("courseEmployed").getContext('2d');
-    new Chart(courseEmployed, {
-        type: 'pie',
-        data: {
-            labels:  <?php echo json_encode(getLabelsByJob($conn)) ?>,
-            datasets: [{
-                label: 'food Items',
-                backgroundColor: [
-                    'rgb(158,1,66)',
-                    'rgb(213,62,79)',
-                    'rgb(244,109,67)',
-                    'rgb(253,174,97)',
-                    'rgb(254,224,139)',
-                    'rgb(230,245,152)',
-                    'rgb(171,221,164)',
-                    'rgb(102,194,165)',
-                    'rgb(50,136,189)',
-                    'rgb(94,79,162)',
-                ],
-                data: <?php echo json_encode(getEmployedJobForCurYear($conn, getLabelsByJob($conn))) ?>,
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: "right"
+        const courseEmployed = document.getElementById("courseEmployed").getContext('2d');
+        new Chart(courseEmployed, {
+            type: 'pie',
+            data: {
+                labels:  <?php echo json_encode(getLabelsByJob($conn)) ?>,
+                datasets: [{
+                    label: 'food Items',
+                    backgroundColor: [
+                        'rgb(158,1,66)',
+                        'rgb(213,62,79)',
+                        'rgb(244,109,67)',
+                        'rgb(253,174,97)',
+                        'rgb(254,224,139)',
+                        'rgb(230,245,152)',
+                        'rgb(171,221,164)',
+                        'rgb(102,194,165)',
+                        'rgb(50,136,189)',
+                        'rgb(94,79,162)',
+                    ],
+                    data: <?php echo json_encode(getEmployedJobForCurYear($conn, $_GET['year'], getLabelsByJob($conn))) ?>,
+                }]
             },
-            title: {
-                display: true,
-                text: 'Employed Job Types'
+            options: {
+                responsive: true,
+                legend: {
+                    position: "right"
+                },
+                title: {
+                    display: true,
+                    text: 'Employed Job Types'
+                }
             }
-        }
-    });
+        });
+    }
 </script>

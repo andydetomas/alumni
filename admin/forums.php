@@ -70,19 +70,19 @@
 
                                     <td class="text-center"><?php echo $i++ ?></td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['title']) ?></b></p>
+                                        <p><?php echo ucwords($row['title']) ?></p>
 
                                     </td>
                                     <td class="">
-                                        <p class="truncate"><b><?php echo $desc ?></b></p>
+                                        <p class="truncate"><?php echo $desc ?></p>
 
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['first_name'])." ".ucwords($row['last_name']) ?></b></p>
+                                        <p><?php echo ucwords($row['first_name'])." ".ucwords($row['last_name']) ?></p>
 
                                     </td>
                                     <td class="text-right">
-                                        <p><b><?php echo number_format($count_comments) ?></b></p>
+                                        <p><?php echo number_format($count_comments) ?></p>
 
                                     </td>
                                     <td class="text-center">

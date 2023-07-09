@@ -12,7 +12,6 @@
         </div>
     </form>
 </div>
-
 <script>
     $('.text-jqte').jqte();
     $('#manage-tracer').submit(function (e) {
@@ -37,10 +36,13 @@
         })
     })
 </script>
+<!--Default Behaviour Only 5 Year Past and 1 Year Ahead-->
 <script>
     $('.datepickerY').datepicker({
         format: "yyyy",
         viewMode: "years",
-        minViewMode: "years"
+        minViewMode: "years",
+        startDate: "-4Y",
+        endDate: "+1Y"
     });
 </script>

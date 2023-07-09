@@ -4,7 +4,7 @@
     }
 
     nav#sidebar {
-        background: url(assets/uploads/<?php echo $_SESSION['system']['cover_img'] ?>) !important
+        background: url(assets/uploads/background_admin.jpg) !important
     }
 </style>
 
@@ -29,9 +29,9 @@
                         class="fa fa-calendar-day"></i></span> Events</a>
         <a href="index.php?page=forums" class="nav-item nav-forums"><span class='icon-field'><i
                         class="fa fa-comments"></i></span> Forum</a>
-        <?php if ($_SESSION['login_type'] == 1): ?>
+        <?php if ($_SESSION['login_type'] == 'ADMIN'): ?>
             <a href="index.php?page=users" class="nav-item nav-users"><span class='icon-field'><i
-                            class="fa fa-users"></i></span> Users</a>
+                            class="fa fa-users"></i></span> Privileged  Users</a>
             <a href="index.php?page=site_settings" class="nav-item nav-site_settings"><span class='icon-field'><i
                             class="fa fa-cogs"></i></span> System Settings</a>
         <?php endif; ?>

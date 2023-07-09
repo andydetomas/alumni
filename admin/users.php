@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <div class="container-fluid">
 
     <div class="row">
@@ -21,14 +17,14 @@
                         <th class="text-center">Name</th>
                         <th class="text-center">Username</th>
                         <th class="text-center">Type</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
                     include 'db_connect.php';
-                    $type = ["", "Admin", "Staff", "Alumnus/Alumna"];
-                    $users = $conn->query("SELECT * FROM users order by name asc");
+                    $users = $conn->query("SELECT * FROM users where (type = 'ADMIN' OR type = 'OFFICER') order by first_name asc");
                     $i = 1;
                     while ($row = $users->fetch_assoc()):
                         ?>
@@ -37,14 +33,17 @@
                                 <?php echo $i++ ?>
                             </td>
                             <td>
-                                <?php echo ucwords($row['name']) ?>
+                                <?php echo ucwords($row['first_name'])." ".ucwords($row['middle_name'])." ".ucwords($row['last_name']) ?>
                             </td>
 
                             <td>
                                 <?php echo $row['username'] ?>
                             </td>
                             <td>
-                                <?php echo $type[$row['type']] ?>
+                                <?php echo $row['type'] ?>
+                            </td>
+                            <td>
+                                <?php echo $row['status'] ?>
                             </td>
                             <td>
                                 <center>
@@ -59,8 +58,13 @@
                                             <a class="dropdown-item edit_user" href="javascript:void(0)"
                                                data-id='<?php echo $row['id'] ?>'>Edit</a>
                                             <div class="dropdown-divider"></div>
+                                           <?php if($row['status'] == 'INACTIVE'):?>
+                                            <a class="dropdown-item activate_user" href="javascript:void(0)"
+                                               data-id='<?php echo $row['id'] ?>'>Activate</a>
+                                            <?php else: ?>
                                             <a class="dropdown-item delete_user" href="javascript:void(0)"
-                                               data-id='<?php echo $row['id'] ?>'>Delete</a>
+                                               data-id='<?php echo $row['id'] ?>'>Deactivate</a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </center>
@@ -82,8 +86,11 @@
     $('.edit_user').click(function () {
         uni_modal('Edit User', 'manage_user.php?id=' + $(this).attr('data-id'))
     })
+    $('.activate_user').click(function () {
+        _conf("Are you sure you want to activate this user?", "activate_user", [$(this).attr('data-id')])
+    })
     $('.delete_user').click(function () {
-        _conf("Are you sure to delete this user?", "delete_user", [$(this).attr('data-id')])
+        _conf("Are you sure to deactivate this user?", "delete_user", [$(this).attr('data-id')])
     })
 
     function delete_user($id) {
@@ -94,11 +101,27 @@
             data: {id: $id},
             success: function (resp) {
                 if (resp == 1) {
-                    alert_toast("Data successfully deleted", 'success')
+                    alert_toast("User successfully deleted", 'success');
                     setTimeout(function () {
                         location.reload()
                     }, 1500)
 
+                }
+            }
+        })
+    }
+    function activate_user($id) {
+        start_load()
+        $.ajax({
+            url: 'ajax.php?action=activate_user',
+            method: 'POST',
+            data: {id: $id},
+            success: function (resp) {
+                if (resp == 1) {
+                    alert_toast("User successfully activated", 'success');
+                    setTimeout(function () {
+                        location.reload()
+                    }, 1500)
                 }
             }
         })

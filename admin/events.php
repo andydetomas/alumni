@@ -55,10 +55,10 @@
                                 <tr>
                                     <td class="text-center"><?php echo $i++ ?></td>
                                     <td class="">
-                                        <p><b><?php echo date("M d, Y h:i A", strtotime($row['schedule'])) ?></b></p>
+                                        <p><?php echo date("M d, Y h:i A", strtotime($row['schedule'])) ?></p>
                                     </td>
                                     <td class="">
-                                        <p><b><?php echo ucwords($row['title']) ?></b></p>
+                                        <p><?php echo ucwords($row['title']) ?></p>
                                     </td>
                                     <td>
                                         <p class="truncate"><?php echo strip_tags($desc) ?></p>

@@ -39,6 +39,12 @@ if ($action == 'delete_user') {
         echo $save;
     }
 }
+if ($action == 'activate_user') {
+    $save = $crud->activate_user();
+    if ($save) {
+        echo $save;
+    }
+}
 if ($action == 'signup') {
     $save = $crud->signup();
     if ($save) {
@@ -68,12 +74,6 @@ if ($action == "delete_course") {
     $delete = $crud->delete_course();
     if ($delete) {
         echo $delete;
-    }
-}
-if ($action == "delete_alumni") {
-    $save = $crud->delete_alumni();
-    if ($save) {
-        echo $save;
     }
 }
 if ($action == "update_alumni_acc") {

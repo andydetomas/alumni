@@ -90,7 +90,7 @@ Class Action
         foreach ($_SESSION as $key => $value) {
             unset($_SESSION[$key]);
         }
-        header("location:login.php");
+        header("location:../index.php");
     }
 
     function logout2()
@@ -105,36 +105,48 @@ Class Action
     function save_user()
     {
         extract($_POST);
-        $data = " name = '$name' ";
+        $data = " first_name = '$first_name' ";
+        $data .= ", middle_name = '$middle_name' ";
+        $data .= ", last_name = '$last_name' ";
         $data .= ", username = '$username' ";
         if (! empty($password)) {
             $data .= ", password = '".md5($password)."' ";
         }
         $data .= ", type = '$type' ";
-        if ($type == 1) {
-            $establishment_id = 0;
-        }
-        $data .= ", establishment_id = '$establishment_id' ";
-        $chk = $this->db->query("Select * from users where username = '$username' and id !='$id' ")->num_rows;
+        $chk = $this->db->query("SELECT * FROM users where username = '$username' and id != ".$id)->num_rows;
         if ($chk > 0) {
             return 2;
             exit;
         }
         if (empty($id)) {
             $save = $this->db->query("INSERT INTO users set ".$data);
+            if ($save) {
+                return 1;
+            }
         } else {
-            $save = $this->db->query("UPDATE users set ".$data." where id = ".$id);
-        }
-        if ($save) {
+            $save = $this->db->query( "UPDATE users set ".$data." where id = ".$id);
+            if (!$save) {
+                return 2;
+            }
             return 1;
         }
+        return 3;
     }
 
     function delete_user()
     {
         extract($_POST);
-        $delete = $this->db->query("DELETE FROM users where id = ".$id);
+        $delete = $this->db->query("UPDATE users set status='INACTIVE' where id = ".$id);
         if ($delete) {
+            return 1;
+        }
+    }
+
+    function activate_user()
+    {
+        extract($_POST);
+        $save = $this->db->query("UPDATE users set status='ACTIVE' where id = ".$id);
+        if ($save) {
             return 1;
         }
     }
@@ -197,7 +209,7 @@ Class Action
         $save = $this->db->query("UPDATE users set $data where id = '{$_SESSION['login_id']}' ");
         if ($save) {
             $row = $this->db->query("SELECT * FROM users where id= '{$_SESSION['login_id']}' ")->fetch_assoc();
-            $_POST['password']=$row['password']; //Get password to enabled logging in again
+            $_POST['password']=$row['password']; //Get password to enable logging in again
 
             $data = '';
             foreach ($_POST as $k => $v) {
@@ -283,19 +295,10 @@ Class Action
         }
     }
 
-    function delete_alumni()
-    {
-        extract($_POST);
-        $delete = $this->db->query("UPDATE alumni_bio set status = 'INACTIVE' where id = ".$id);
-        if ($delete) {
-            return 1;
-        }
-    }
-
     function update_alumni_acc()
     {
         extract($_POST);
-        $update = $this->db->query("UPDATE alumnus_bio set status = '$status' where id = $id");
+        $update = $this->db->query("UPDATE users set status = '$status' where id = $id");
         if ($update) {
             return 1;
         }

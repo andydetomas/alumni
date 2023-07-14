@@ -442,7 +442,7 @@ CREATE TABLE `users` (
   `username` varchar(200) NOT NULL,
   `password` text NOT NULL,
   `type` enum('ADMIN','OFFICER','ALUMNI','') NOT NULL DEFAULT 'ALUMNI',
-  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'ACTIVE'
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

@@ -71,7 +71,7 @@ Class Action
                     }
                 }
             }
-            if (isset($_SESSION['bio']['status']) && $_SESSION['bio']['status'] != 'ACTIVE') {
+            if (isset($_SESSION['login_status']) && $_SESSION['login_status'] != 'ACTIVE') {
                 foreach ($_SESSION as $key => $value) {
                     unset($_SESSION[$key]);
                 }

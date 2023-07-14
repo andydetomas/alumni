@@ -32,7 +32,7 @@
                             <tbody>
                             <?php
                             $i = 1;
-                            $alumni = $conn->query("SELECT a.*,c.course,Concat(a.lastname,', ',a.firstname,' ',a.middlename) as name, u.status from alumnus_bio a inner join users u on u.id=a.user_id inner join courses c on c.id = a.course_id order by Concat(a.lastname,', ',a.firstname,' ',a.middlename) asc");
+                            $alumni = $conn->query("SELECT a.*,c.course,Concat(a.lastname,', ',a.firstname,' ',a.middlename) as name, u.status from alumnus_bio a inner join users u on u.id=a.user_id inner join courses c on c.id = a.course_id order by u.id desc");
                             while ($row = $alumni->fetch_assoc()):
 
                                 ?>

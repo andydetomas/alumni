@@ -47,7 +47,7 @@ CREATE TABLE `alumnus_bio` (
 --
 
 INSERT INTO `alumnus_bio` (`id`, `user_id`, `firstname`, `middlename`, `lastname`, `gender`, `batch`, `course_id`, `email`, `connected_to`, `avatar`, `date_created`) VALUES
-(1, 2, 'Jonas', 'Greiser', 'Snow', 'Male', '2009', 1, 'snow@gmail.com', 'Google Inc', 'alumni.jpg', '2020-10-15'),
+(1, 2, 'Jonas', 'Greiser', 'Snow', 'Male', '2009', 1, 'jonas@gmail.com', 'Google Inc', 'alumni.jpg', '2020-10-15'),
 (2, 4, 'Willette', 'Letherbury', 'Danzey', 'Female', '2008', 10, 'danzey@gmail.com', 'Wikido', '1688142480_g1.jpg', '2023-07-01'),
 (15, 80, 'Codee', 'Hatchell', 'Harradine', 'Male', '2004', 9, 'harradine@gmail.com', 'Jabberbean', '1688148060_g2.jpg', '2023-07-01'),
 (16, 81, 'Shalna', 'Burdus', 'McGuinley', 'Female', '1994', 9, 'mcguinley@gmail.com', 'Livetube', '1688148120_g3.jpg', '2023-07-01'),

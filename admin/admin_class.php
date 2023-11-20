@@ -113,17 +113,25 @@ Class Action
             $data .= ", password = '".md5($password)."' ";
         }
         $data .= ", type = '$type' ";
-        $chk = $this->db->query("SELECT * FROM users where username = '$username' and id != ".$id)->num_rows;
-        if ($chk > 0) {
-            return 2;
-            exit;
-        }
+    
         if (empty($id)) {
+            $chk = $this->db->query("SELECT * FROM users where username = '$username'")->num_rows;
+            if ($chk > 0) {
+                return 2;
+                exit;
+            }
+
             $save = $this->db->query("INSERT INTO users set ".$data);
             if ($save) {
                 return 1;
             }
         } else {
+            $chk = $this->db->query("SELECT * FROM users where username = '$username' and id != ".$id)->num_rows;
+            if ($chk > 0) {
+                return 2;
+                exit;
+            }
+            
             $save = $this->db->query( "UPDATE users set ".$data." where id = ".$id);
             if (!$save) {
                 return 2;
